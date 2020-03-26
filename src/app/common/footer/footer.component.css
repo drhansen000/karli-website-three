@@ -1,8 +1,20 @@
+/* 1. Screen independent */
 ul {
     list-style: none;
     text-align: center;
+    background-color: #000000;
+    color: #FFFFFF;
+    padding: 1em 0;
 }
 
 li {
     margin: 0;
+}
+
+/* 2. Mobile Screen */
+
+
+/* 3. Large Screen */
+@media (min-width: 800px) {
+
 }

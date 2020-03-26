@@ -10,8 +10,14 @@ export class FooterComponent implements OnInit {
   constructor() { }
 
   ngOnInit(): void {
+    this.populateCopyrightYear();
     this.populateLastModified();
   }
+
+  populateCopyrightYear() {
+    document.querySelector('#copyrightYear').textContent = '' + new Date().getFullYear();
+  }
+
   populateLastModified() {
     const days = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];
     const months = [
@@ -32,7 +38,7 @@ export class FooterComponent implements OnInit {
     modifiedDateString += months[modifiedDate.getMonth()] + ' ';
     modifiedDateString += modifiedDate.getDate() + ', ';
     modifiedDateString += modifiedDate.getFullYear();
-    document.querySelector('#lastModified').textContent = modifiedDateString;
+    document.querySelector('#lastModified').textContent += modifiedDateString;
   }
 
 }

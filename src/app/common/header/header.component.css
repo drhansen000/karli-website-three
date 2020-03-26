@@ -1,3 +1,17 @@
-header {
-    display: flex;
+/* 1. Screen independent */
+a {
+    color: #000000;
+    text-decoration: none;
+}
+
+/* 2. Mobile Screen */
+
+
+/* 3. Large Screen */
+@media (min-width: 800px) {
+    header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+    }
 }

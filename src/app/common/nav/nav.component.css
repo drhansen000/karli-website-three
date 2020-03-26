@@ -1,9 +1,46 @@
+/* 1. Screen independent */
+nav {
+    background-color: #000000;
+    color: #FFFFFF;
+}
+
 ul {
+    padding: 0;
     list-style: none;
-    display: flex;
-    justify-content: space-around;
+    text-align: center;
+    margin: 0;
 }
 
 li {
     margin: 0;
+}
+
+a {
+    box-sizing: border-box;
+    display: block;
+    height: 100%;
+    color: #FFFFFF;
+    text-decoration: none;
+    padding: 1em 0;
+    width: 100%;
+}
+
+a:hover {
+    background-color: #FFFFFF;
+    color: #000000;
+}
+
+/* 2. Mobile Screen */
+
+/* 3. Large Screen */
+@media (min-width: 800px) {
+    ul {
+        display: flex;
+        justify-content: space-around;
+        width: 50%;
+    }
+
+    li {
+        width: 25%;
+    }
 }
