@@ -4,17 +4,16 @@ import { NgModule } from '@angular/core';
 import { AppComponent } from './app.component';
 import { FooterComponent } from './common/footer/footer.component';
 import { HeaderComponent } from './common/header/header.component';
-import { NavComponent } from './common/nav/nav.component';
+import { AppRoutingModule, routingComponents } from './app-routing.module';
 
 @NgModule({
   declarations: [
     AppComponent,
-    FooterComponent,
-    HeaderComponent,
-    NavComponent
+    routingComponents
   ],
   imports: [
-    BrowserModule
+    BrowserModule,
+    AppRoutingModule
   ],
   providers: [],
   bootstrap: [AppComponent]
