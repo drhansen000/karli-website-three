@@ -7,13 +7,27 @@ import { ContactComponent } from './contact/contact.component';
 import { HeaderComponent } from './common/header/header.component';
 import { NavComponent } from './common/nav/nav.component';
 import { FooterComponent } from './common/footer/footer.component';
+import { ServiceDetailComponent } from './appointments/service-detail/service-detail.component';
+import { ProductDetailComponent } from './products/product-detail/product-detail.component';
+import { AccountComponent } from './account/account/account.component';
+import { LoginComponent } from './account/login/login.component';
+import { CartComponent } from './account/cart/cart.component';
+import { FutureAppointmentsComponent } from './account/future-appointments/future-appointments.component';
+import { RegistrationComponent } from './account/registration/registration.component';
 
 const routes: Routes = [
-  {path: '', redirectTo: '/home', pathMatch: 'full'},
   {path: 'home', component: HomeComponent},
   {path: 'appointments', component: AppointmentTableComponent},
   {path: 'products', component: ProductListComponent},
-  {path: 'contact', component: ContactComponent}
+  {path: 'contact', component: ContactComponent},
+  {path: 'service', component: ServiceDetailComponent},
+  {path: 'product', component: ProductDetailComponent},
+  {path: 'cart', component: CartComponent},
+  {path: 'login', component: LoginComponent},
+  {path: 'registration', component: RegistrationComponent},
+  {path: 'future-appointments', component: FutureAppointmentsComponent},
+  {path: 'account', component: AccountComponent},
+  {path: '', redirectTo: '/home', pathMatch: 'prefix'} // Default Route
 ];
 
 @NgModule({
@@ -26,10 +40,18 @@ const routes: Routes = [
   ]
 })
 export class AppRoutingModule { }
-export const routingComponents = [HeaderComponent, 
+export const routingComponents = [HeaderComponent,
   NavComponent,
   FooterComponent,
   HomeComponent,
   AppointmentTableComponent,
   ProductListComponent,
-  ContactComponent];
+  ContactComponent,
+  CartComponent,
+  LoginComponent,
+  ServiceDetailComponent,
+  ProductDetailComponent,
+  RegistrationComponent,
+  FutureAppointmentsComponent,
+  AccountComponent
+];

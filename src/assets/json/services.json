@@ -1,0 +1,58 @@
+{
+    "Services": [
+        {
+            "name": "Men's Cut",
+            "image": "/assets/images/men-cut.jpg",
+            "price": "10",
+            "duration": "30"
+        },
+        {
+            "name": "Women's Cut",
+            "image": "/assets/images/woman-cut.jpg",
+            "price": "10",
+            "duration": "30"
+        },
+        {
+            "name": "Chilren's Cut",
+            "image": "/assets/images/child-cut.jpg",
+            "price": "10",
+            "duration": "30"
+        },
+        {
+            "name": "Color",
+            "image": "/assets/images/color.jpg",
+            "price": "10",
+            "duration": "30"
+        },
+        {
+            "name": "Highlights",
+            "image": "/assets/images/placeholder.jpg",
+            "price": "10",
+            "duration": "30"
+        },
+        {
+            "name": "Acrylic Nails",
+            "image": "/assets/images/placeholder.jpg",
+            "price": "10",
+            "duration": "30"
+        },
+        {
+            "name": "Scalp Treatment",
+            "image": "/assets/images/placeholder.jpg",
+            "price": "10",
+            "duration": "30"
+        },
+        {
+            "name": "Up-dos",
+            "image": "/assets/images/updo2.jpg",
+            "price": "10",
+            "duration": "30"
+        },
+        {
+            "name": "Makeup",
+            "image": "/assets/images/makeup.jpg",
+            "price": "10",
+            "duration": "30"
+        }
+    ]
+}
