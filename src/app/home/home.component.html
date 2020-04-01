@@ -4,11 +4,31 @@
         <h2>Services We Offer</h2>
         <button routerLink="/appointments">Create An Appointment</button>
         <ul id="services">
+            <li *ngFor="let service of services" class="service">
+                <a routerLink="/service" title="View details of {{ service.name }}">
+                    <img [src]="service.image" alt="Example of {{ service.name }}">
+                    <ul class="details">
+                        <li class="detail">{{ service.name }}</li>
+                        <li class="detail">${{ service.price }}</li>
+                        <li class="detail">{{ service.duration }} minutes</li>
+                    </ul>
+                </a>
+            </li>
         </ul>
     </section>
     <section>
         <h2>Products We Offer</h2>
         <ul id="products">
+            <li *ngFor="let product of products" class="product">
+                <a routerLink="/product" title="View details of {{ product.name }}">
+                    <img [src]="product.image" alt="Example of {{ product.name }}">
+                    <ul class="details">
+                        <li class="detail">{{ product.name }}</li>
+                        <li class="detail">${{ product.price }}</li>
+                        <li class="detail">{{ product.size }} oz</li>
+                    </ul>
+                </a>
+            </li>
         </ul>
     </section>
 </main>

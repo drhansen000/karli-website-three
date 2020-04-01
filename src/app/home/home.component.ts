@@ -6,8 +6,10 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./home.component.css']
 })
 export class HomeComponent implements OnInit {
+  services: Array<Service>;
+  products: Array<Product>;
 
-  constructor() { }
+  constructor() {}
 
   ngOnInit(): void {
     this.getServices('/assets/json/services.json');
@@ -24,30 +26,11 @@ export class HomeComponent implements OnInit {
         }
       })
       .then((data) => {
-        this.buildServices(data);
+        this.services = data.Services;
       })
       .catch((error) => {
         console.log(error.message);
       });
-  }
-
-  buildServices(services): void {
-    console.log(services);
-    services = services.Services;
-    console.log(services);
-    const serviceList = document.querySelector('#services');
-    let servicesDisplay = '';
-    for (const service of services) {
-      servicesDisplay += '<li class="service">';
-      servicesDisplay += '<a routerLink="/appointments" title="View details of ' + service.name + ' service">';
-      servicesDisplay += '<img src="' + service.image + '" alt="' + service.name + ' example">';
-      servicesDisplay += '<ul class="details">';
-      servicesDisplay += '<li class="detail">' + service.name + '</li>';
-      servicesDisplay += '<li class="detail">$' + service.price + '</li>';
-      servicesDisplay += '<li class="detail">' + service.duration + ' minutes</li>';
-      servicesDisplay += '</ul></<ul></a></li>';
-    }
-    serviceList.innerHTML = servicesDisplay;
   }
 
   getProducts(url): void {
@@ -60,29 +43,25 @@ export class HomeComponent implements OnInit {
         }
       })
       .then((data) => {
-        this.buildProducts(data);
+        this.products = data.Products;
       })
       .catch((error) => {
         console.log(error.message);
       });
   }
 
-  buildProducts(products): void {
-    console.log(products);
-    products = products.Products;
-    console.log(products);
-    const productList = document.querySelector('#products');
-    let productsDisplay = '';
-    for (const product of products) {
-      productsDisplay += '<li class="product">';
-      productsDisplay += '<a routerLink="/products" title="View details of ' + product.name + '">';
-      productsDisplay += '<img src="' + product.image + '" alt="' + product.name + '">';
-      productsDisplay += '<ul class="details">';
-      productsDisplay += '<li class="detail">' + product.name + '</li>';
-      productsDisplay += '<li class="detail">$' + product.price + '</li>';
-      productsDisplay += '<li class="detail">' + product.size + 'oz</li>';
-      productsDisplay += '</ul></<ul></a></li>';
-    }
-    productList.innerHTML = productsDisplay;
-  }
+}
+
+interface Service {
+  name: string;
+  image: string;
+  price: string;
+  duration: string;
+}
+
+interface Product {
+  name: string;
+  image: string;
+  price: number;
+  size: number;
 }

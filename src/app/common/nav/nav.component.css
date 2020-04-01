@@ -26,12 +26,7 @@ a {
     width: 100%;
 }
 
-a:hover {
-    background-color: #FFFFFF;
-    color: #000000;
-}
-
-.active {
+a:hover, .active {
     background-color: #FFFFFF;
     color: #000000;
 }
