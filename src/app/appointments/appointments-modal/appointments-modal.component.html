@@ -1,0 +1,42 @@
+<h2>Enter Appointment Information</h2>
+<form action="" method="post">
+  <div>
+    <label for="name">Name: </label>
+    <input type="text" name="name" placeholder="John Smith">
+  </div>
+  <div>
+      <label for="service"></label>
+      <select name="service">
+          <option *ngFor="let service of services" value="{{ service.name }}">{{ service.name }}</option>
+      </select>
+  </div>
+  <div>
+      <label for="date">Date: </label>
+      <input type="date" name="date">
+  </div>
+  <div>
+      <label for="start">Start: </label>
+      <input type="datetime" name="start">
+  </div>
+  <div>
+      <label for="end">End: </label>
+      <input type="datetime" name="end" readonly>
+  </div>
+  <div>
+    <label for="phone">Phone: </label>
+    <input type="tel" name="phone" placeholder="(xxx)xxx-xxxx">
+  </div>
+  <div>
+    <label for="email">Email: </label>
+    <input type="email" name="email" placeholder="placeholder@example.com">
+  </div>
+  <div>
+    <label for="picture">Picture: </label>
+    <input type="file" name="picture">
+  </div>
+  <div>
+    <label for="comments">Comments: </label>
+    <textarea name="comments" cols="30" rows="10" placeholder="I have very fine hair"></textarea>
+  </div>
+  <button type="submit">Create Appointment</button>
+</form>

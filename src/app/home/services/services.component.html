@@ -1,0 +1,16 @@
+<section>
+    <h2>Services We Offer</h2>
+    <button routerLink="/appointments">Create An Appointment</button>
+    <ul id="services">
+        <li *ngFor="let service of services" class="service">
+            <a routerLink="/service" title="View details of {{ service.name }}">
+                <img [src]="service.image" alt="Example of {{ service.name }}">
+                <ul class="details">
+                    <li class="detail">{{ service.name }}</li>
+                    <li class="detail">${{ service.price }}</li>
+                    <li class="detail">{{ service.duration }} minutes</li>
+                </ul>
+            </a>
+        </li>
+    </ul>
+</section>

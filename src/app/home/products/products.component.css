@@ -4,26 +4,17 @@ ul {
     padding: 0;
 }
 
-button {
-    padding: .5em;
-    border-radius: .5em;
-    background-color: #00A997;
-    color: #000000;
-    border: #000000 solid 1px;
-    font-family: serif;
-    cursor: pointer;
-}
-
-.service, .product {
+.product {
     position: relative;
 }
 
-.service img, .product img {
+img {
     width: 100%;
     height: 100%;
 }
 
-.service a, .product a {
+a {
+    text-decoration: none;
     display: block;
     width: 100%;
     height: 100%;
@@ -56,32 +47,12 @@ h2 {
     margin-bottom: .5em;
 }
 
-button {
-    font-size: 1em;
-}
-
-.service, .product {
+.product {
     margin-bottom: 1em;
-}
-
-a {
-    text-decoration: none;
-}
-
-.service img {
-    max-width: 100%;
 }
 
 /* 3. Large Screens */
 @media (min-width: 800px) {
-    main {
-        text-align: center;
-    }
-
-    h1 {
-        text-align: initial;
-    }
-
     ul {
         display: grid;
         grid-template-columns: repeat(4, 1fr);
@@ -89,15 +60,8 @@ a {
         row-gap: 2em;
     }
 
-    h1 {
-        font-size: 3.5em;
-    }
-
     h2 {
+        text-align: center;
         font-size: 2.5em;
-    }
-
-    button {
-        font-size: 1.5em;
     }
 }

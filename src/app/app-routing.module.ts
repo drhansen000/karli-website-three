@@ -14,10 +14,11 @@ import { LoginComponent } from './account/login/login.component';
 import { CartComponent } from './account/cart/cart.component';
 import { FutureAppointmentsComponent } from './account/future-appointments/future-appointments.component';
 import { RegistrationComponent } from './account/registration/registration.component';
+import { AppointmentsComponent } from './appointments/appointments/appointments.component';
 
 const routes: Routes = [
   {path: 'home', component: HomeComponent},
-  {path: 'appointments', component: AppointmentTableComponent},
+  {path: 'appointments', component: AppointmentsComponent},
   {path: 'products', component: ProductListComponent},
   {path: 'contact', component: ContactComponent},
   {path: 'service', component: ServiceDetailComponent},
@@ -44,7 +45,7 @@ export const routingComponents = [HeaderComponent,
   NavComponent,
   FooterComponent,
   HomeComponent,
-  AppointmentTableComponent,
+  AppointmentsComponent,
   ProductListComponent,
   ContactComponent,
   CartComponent,

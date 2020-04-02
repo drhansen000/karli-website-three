@@ -1,0 +1,8 @@
+<main>
+  <h1>Appointments</h1>
+  <h2>Select an Available Time</h2>
+  <app-appointments-table-mobile *ngIf="getIsMobile(); else appointmentTable"></app-appointments-table-mobile>
+  <ng-template #appointmentTable>
+    <app-appointment-table></app-appointment-table>
+  </ng-template>
+</main>
