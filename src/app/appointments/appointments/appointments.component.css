@@ -3,6 +3,25 @@ h2 {
     text-align: center;
 }
 
+#tableOptions {
+    display: flex;
+    justify-content: space-between;
+}
+
+#tableOptions .positiveButton {
+    align-self: center;
+}
+
+#leftArrow {
+    transform: rotateY(180deg);
+    display: inline-block;
+}
+
 /* 2. Mobile Screens */
 
 /* 3. Large Screens */
+@media (min-width: 800px) {
+    button {
+        font-size: 1.2em;
+    }
+}

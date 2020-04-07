@@ -1,6 +1,27 @@
+@import "~@angular/material/prebuilt-themes/indigo-pink.css";
 /* 1. Screen Independent */
 body {
     margin: 0;
+}
+
+.positiveButton {
+    padding: .5em;
+    border-radius: .5em;
+    background-color: #00A997;
+    color: #000000;
+    border: #000000 solid 1px;
+    font-family: serif;
+    cursor: pointer;
+}
+
+.negativeButton {
+    padding: .5em;
+    border-radius: .5em;
+    background-color: #FF0000;
+    color: #FFFFFF;
+    border: #000000 solid 1px;
+    font-family: serif;
+    cursor: pointer;
 }
 
 /* 2. Mobile Screens */

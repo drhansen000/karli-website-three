@@ -1,42 +1,46 @@
-<h2>Enter Appointment Information</h2>
 <form action="" method="post">
-  <div>
-    <label for="name">Name: </label>
-    <input type="text" name="name" placeholder="John Smith">
-  </div>
-  <div>
-      <label for="service"></label>
-      <select name="service">
-          <option *ngFor="let service of services" value="{{ service.name }}">{{ service.name }}</option>
+  <h2 mat-dialog-title>Enter Appointment Information</h2>
+  <div mat-dialog-content>
+    <div class="center">
+      <select name="service" class="pointer prettyBorder" id="selectBox" [(ngModel)]="serviceIndex" (change)="onChangeService()">
+        <option *ngFor="let service of services; let i = index" value="{{ i }}">{{ service.name }}</option>
       </select>
+    </div>
+    <div class="center">
+      <input type="date" name="date" [valueAsNumber]="date" (change)="onChangeDate($event)" class="pointer prettyBorder" required>
+    </div>
+    <div class="center">
+        <label for="startTime">From: </label>
+        <input type="time" name="startTime" step="900" (input)='setStartTime($event)' [valueAsNumber]="startTime" class="pointer prettyBorder" required>
+        <label for="endTime"> To:</label>
+        <input type="time" name="endTime" class="noBorder" [valueAsNumber]='endTime' readonly>
+    </div>
+    <div class="center">
+      <input type="text" name="name" placeholder="Your name" class="prettyBorder" [(ngModel)]="name" required>
+    </div>
+    <div class="twoCol">
+      <div>
+        <input type="tel" name="phone" placeholder="(xxx)xxx-xxxx" class="prettyBorder" [(ngModel)]="phone">
+      </div>
+      <div>
+        <input type="email" name="email" placeholder="placeholder@example.com" class="prettyBorder" [(ngModel)]="email">
+      </div>
+    </div>
+    <div class="center">
+      <label for="picture">Picture: </label>
+      <input type="file" name="picture" class="pointer" [(ngModel)]="picture">
+    </div>
+    <div class="center">
+      <label for="comments">Comments: </label><br>
+      <textarea name="comments" cols="30" rows="10" placeholder="I have very fine hair" [(ngModel)]="comments"></textarea>
+    </div>
+    <div class="center">
+      <p>Price: ${{ price }}</p>
+    </div>
   </div>
-  <div>
-      <label for="date">Date: </label>
-      <input type="date" name="date">
+  <div mat-dialog-actions id="buttons">
+    <!-- We'll alter this button to submit once we've added the back-end -->
+    <button type="button" (click)="testCompletion()" class="positiveButton">Create</button>
+    <button type="button" class="negativeButton" mat-dialog-close>Cancel</button>
   </div>
-  <div>
-      <label for="start">Start: </label>
-      <input type="datetime" name="start">
-  </div>
-  <div>
-      <label for="end">End: </label>
-      <input type="datetime" name="end" readonly>
-  </div>
-  <div>
-    <label for="phone">Phone: </label>
-    <input type="tel" name="phone" placeholder="(xxx)xxx-xxxx">
-  </div>
-  <div>
-    <label for="email">Email: </label>
-    <input type="email" name="email" placeholder="placeholder@example.com">
-  </div>
-  <div>
-    <label for="picture">Picture: </label>
-    <input type="file" name="picture">
-  </div>
-  <div>
-    <label for="comments">Comments: </label>
-    <textarea name="comments" cols="30" rows="10" placeholder="I have very fine hair"></textarea>
-  </div>
-  <button type="submit">Create Appointment</button>
 </form>

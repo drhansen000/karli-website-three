@@ -9,6 +9,9 @@ import { AppointmentsTableMobileComponent } from './appointments/appointments-ta
 import { AppointmentTableComponent } from './appointments/appointment-table/appointment-table.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { AppointmentsModalComponent } from './appointments/appointments-modal/appointments-modal.component';
+import { MatDialogModule } from '@angular/material/dialog';
+import { FormsModule } from '@angular/forms';
+
 
 @NgModule({
   declarations: [
@@ -23,7 +26,12 @@ import { AppointmentsModalComponent } from './appointments/appointments-modal/ap
   imports: [
     BrowserModule,
     AppRoutingModule,
-    BrowserAnimationsModule
+    BrowserAnimationsModule,
+    MatDialogModule,
+    FormsModule
+  ],
+  entryComponents: [
+    AppointmentsModalComponent
   ],
   providers: [],
   bootstrap: [AppComponent]

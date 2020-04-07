@@ -4,16 +4,6 @@ ul {
     padding: 0;
 }
 
-button {
-    padding: .5em;
-    border-radius: .5em;
-    background-color: #00A997;
-    color: #000000;
-    border: #000000 solid 1px;
-    font-family: serif;
-    cursor: pointer;
-}
-
 .service {
     position: relative;
 }

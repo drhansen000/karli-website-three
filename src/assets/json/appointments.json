@@ -1,16 +1,28 @@
 {
-    "Appointments": {
-        "Week1": {
+    "Appointments": [
+        {
+            "0": [
+                {
+                    "1": [
+                        {
+                            "780": {
+                                "end": "795",
+                                "name": "Daniel Hansen",
+                                "comments": "",
+                                "service": "Men's Cut",
+                                "image": "",
+                                "email": "",
+                                "phone": "8888888888"
+                            }
+                        }
+                    ]
+                },
+                {
+                    "2": [
 
-        },
-        "Week2": {
-
-        },
-        "Week3": {
-
-        },
-        "Week4": {
-            
+                    ]
+                }
+            ]
         }
-    }
+    ]
 }

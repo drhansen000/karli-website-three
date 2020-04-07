@@ -1,6 +1,6 @@
 <section>
     <h2>Services We Offer</h2>
-    <button routerLink="/appointments">Create An Appointment</button>
+    <button routerLink="/appointments" class="positiveButton">Create An Appointment</button>
     <ul id="services">
         <li *ngFor="let service of services" class="service">
             <a routerLink="/service" title="View details of {{ service.name }}">

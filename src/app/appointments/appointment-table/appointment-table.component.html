@@ -1,1 +1,27 @@
-<p>Appointment table works!</p>
+<div id="appointmentTable">
+    <ul id="rowHeaders">
+        <h3></h3>
+        <li class="8">8am</li>
+        <li class="9">9am</li>
+        <li class="10">10am</li>
+        <li class="11">11am</li>
+        <li class="12">12pm</li>
+        <li class="13">1pm</li>
+        <li class="14">2pm</li>
+        <li class="15">3pm</li>
+        <li class="16">4pm</li>
+        <li class="17">5pm</li>
+        <li class="18">6pm</li>
+    </ul>
+    <div id="dataTable">
+        <ul class="day" *ngFor="let day of days">
+            <h3 class="columnHeader">{{ day.formattedDate }}</h3>
+            <ng-container *ngFor="let hour of hours">
+                <li *ngIf="possibleTimeslot(day.date, hour); else unavailableTimeslot" (click)="onOpenModal(day.date, hour)" class="{{ '' + hour }}"></li>
+                <ng-template #unavailableTimeslot>
+                    <li class="{{ hour }} unavailable"></li>
+                </ng-template>
+            </ng-container>
+        </ul>
+    </div>
+</div>

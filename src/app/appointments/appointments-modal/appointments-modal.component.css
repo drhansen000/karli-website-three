@@ -1,0 +1,49 @@
+/* 1. Screen Independent */
+div {
+    margin: 1em 0;
+}
+select {
+    font-size: 2em;
+}
+
+.prettyBorder {
+    border: solid 2px #00A997;
+    border-radius: .3em;
+}
+
+.noBorder {
+    border: 0;
+}
+
+.twoCol {
+    display: flex;
+    justify-content: space-around;
+}
+
+option {
+    width: 100%;
+    text-align: center;
+}
+
+.pointer, option:hover {
+    cursor: pointer;
+}
+
+.center {
+    text-align: center;
+}
+
+#buttons {
+    display: flex;
+    justify-content: center;
+}
+
+/* 2. Mobile Screens */
+
+
+/* 3. Large Screens */
+@media (min-width: 800px) {
+    button {
+        font-size: 1.2em;
+    }
+}

@@ -1,8 +1,9 @@
 <main>
   <h1>Appointments</h1>
-  <h2>Select an Available Time</h2>
-  <app-appointments-table-mobile *ngIf="getIsMobile(); else appointmentTable"></app-appointments-table-mobile>
-  <ng-template #appointmentTable>
-    <app-appointment-table></app-appointment-table>
-  </ng-template>
+  <div id="tableOptions">
+    <button class="positiveButton"><span id="leftArrow" class="arrow">&#10151;</span> Previous</button>
+    <h2>Select an Available Time</h2>
+    <button class="positiveButton">Next <span class="arrow">&#10151;</span></button>
+  </div>
+  <app-appointment-table></app-appointment-table>
 </main>
