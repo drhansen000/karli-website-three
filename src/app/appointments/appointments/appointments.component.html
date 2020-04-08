@@ -1,9 +1,9 @@
 <main>
   <h1>Appointments</h1>
   <div id="tableOptions">
-    <button class="positiveButton"><span id="leftArrow" class="arrow">&#10151;</span> Previous</button>
+    <button class="positiveButton" (click)="getPreviousWeek()" [ngClass]="{hidden: currentWeek}"><span id="leftArrow" class="arrow">&#10151;</span> Previous</button>
     <h2>Select an Available Time</h2>
-    <button class="positiveButton">Next <span class="arrow">&#10151;</span></button>
+    <button class="positiveButton" (click)="getNextWeek()" [ngClass]="{hidden: latestWeek}">Next <span class="arrow">&#10151;</span></button>
   </div>
-  <app-appointment-table></app-appointment-table>
+  <app-appointment-table [startDate]="startDate"></app-appointment-table>
 </main>

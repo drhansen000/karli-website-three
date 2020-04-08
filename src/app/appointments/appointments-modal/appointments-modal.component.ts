@@ -18,9 +18,12 @@ import { MAT_DIALOG_DATA } from '@angular/material/dialog';
 })
 export class AppointmentsModalComponent implements OnInit {
   // Time variables
-  private MILLISECONDS_IN_DAY: number;
-  private MILLISECONDS_IN_HOUR: number;
-  date: number; // Date input field listens for this
+  private readonly TODAY: number;
+  private readonly MILLISECONDS_IN_DAY: number;
+  private readonly MILLISECONDS_IN_HOUR: number;
+  private readonly MILLISECONDS_IN_MINUTE: number;
+  private readonly EIGHT_WEEKS: number;
+  dateTime: number; // Date input field listens for this
   startTime: number; // Start time input field listens for this
   endTime: number; // End time input field listens for this
   // Service variables
@@ -44,9 +47,12 @@ export class AppointmentsModalComponent implements OnInit {
       1. Optionally retrieve user data and store it into name and phone and/or email
   */
   constructor(@Inject(MAT_DIALOG_DATA) public data) {
+    this.TODAY = new Date().getTime();
     this.MILLISECONDS_IN_DAY = 86400000;
     this.MILLISECONDS_IN_HOUR = 3600000;
-    this.date = data.date;
+    this.MILLISECONDS_IN_MINUTE = 60000;
+    this.EIGHT_WEEKS = this.MILLISECONDS_IN_DAY * 56;
+    this.dateTime = data.date;
     this.startTime = data.time;
     this.services = [];
 
@@ -112,8 +118,7 @@ export class AppointmentsModalComponent implements OnInit {
       The end time input field will update once this method executes
   */
   private setEndTime(): void {
-    const MILLISECONDS_IN_MINUTE = 60000;
-    this.endTime = this.startTime + (this.selectedService.duration * MILLISECONDS_IN_MINUTE);
+    this.endTime = this.startTime + (this.selectedService.duration * this.MILLISECONDS_IN_MINUTE);
   }
 
   /*
@@ -148,7 +153,7 @@ export class AppointmentsModalComponent implements OnInit {
     This method fires whenever the user changes the date
   */
   onChangeDate($event): void {
-    this.date = $event.target.valueAsNumber;
+    this.dateTime = $event.target.valueAsNumber;
   }
 
   /*
@@ -165,7 +170,7 @@ export class AppointmentsModalComponent implements OnInit {
     FORM COMPLETE
     Check that each required input field is filled out correctly
       1. Ensure that serviceIndex is within bounds
-      2. Ensure that the appointment date is filled and within bounds(from today until 4 weeks into the future and not Sunday)
+      2. Ensure that the appointment date is filled and within bounds(from today until 8 weeks into the future and not Sunday)
       3. Ensure that the start time is filled and within bounds(Tue-Fri: 11-7, Mon & Sat: 8-5)
       4. Ensure that the end time is within bounds(Tue-Fri: 11-7, Mon & Sat: 8-5)
       5. Ensure that they entered a name
@@ -180,27 +185,32 @@ export class AppointmentsModalComponent implements OnInit {
       return false;
     }
 
-    const todayDate = new Date(); // TODO: +Set this to 12am
-    let checkMilliseconds = this.getComparisonDate();
-    checkMilliseconds += this.startTime;
-    const checkDate = new Date(checkMilliseconds);
-    const SIX_WEEKS = this.MILLISECONDS_IN_DAY * 42;
-    if (checkMilliseconds < todayDate.getTime() ||
-      checkMilliseconds > todayDate.getTime() + SIX_WEEKS ||
-      checkDate.getDay() === 0) {
-      console.log('Date out of bounds!');
+    const date = this.setTimeToZero(new Date(this.dateTime));
+
+    if (date.getDay() === 0) {
+      console.log('Date is on a Sunday!');
       return false;
     }
 
-    const EARLIEST_TIME = this.getEarliestHour();
-    if (this.startTime < EARLIEST_TIME) {
-      console.log('Start time out of bounds!');
+    if (this.dateTime + this.startTime <= this.TODAY) { // dateTime is in the past
+      console.log('DateTime is in the past');
       return false;
     }
 
-    const LATEST_TIME = this.getLatestHour();
-    if (this.endTime > LATEST_TIME) {
-      console.log('End time out of bounds!');
+    if (this.dateTime + this.startTime > this.TODAY + this.EIGHT_WEEKS) { // dateTime is more than eight weeks away
+      console.log('DateTime is beyond 8 weeks away!');
+      return false;
+    }
+
+    if (this.startTime < this.getEarliestHour(date)) {
+      console.log('Time starts before salon opens!');
+      return false;
+    }
+
+    console.log(this.getLatestHour(date) / this.MILLISECONDS_IN_HOUR);
+    console.log(this.endTime / this.MILLISECONDS_IN_HOUR);
+    if (this.endTime > this.getLatestHour(date)) {
+      console.log('Time ends after salon closes!');
       return false;
     }
 
@@ -223,14 +233,12 @@ export class AppointmentsModalComponent implements OnInit {
   /*
     GET EARLIEST HOUR
     Get the earliest hour for the selected date
-    1. Convert the date from milliseconds into a Date object
-    2. Check what day of the week it is
-    3. Mon & Sat open at 8am, Tue-Fri open at 11am
-    4. Return the earliest hour in milliseconds
+    1. Check what day of the week it is
+    2. Mon & Sat open at 8am, Tue-Fri open at 11am
+    3. Return the earliest hour in milliseconds
   */
-  private getEarliestHour(): number {
-    const tempDate = new Date(this.date);
-    const day = tempDate.getDay();
+  private getEarliestHour(date: Date): number {
+    const day = date.getDay();
     if (day === 1 || day === 6) {
       return 8 * this.MILLISECONDS_IN_HOUR;
     } else {
@@ -240,14 +248,12 @@ export class AppointmentsModalComponent implements OnInit {
 
   /*
     GET LATEST HOUR
-    1. Convert the date from milliseconds into a Date object
-    2. Check what day of the week it is
-    3. Mon & Sat close at 5pm, Tue-Fri close at 7pm
-    4. Return the latest hour in milliseconds
+    1. Check what day of the week it is
+    2. Mon & Sat close at 5pm, Tue-Fri close at 7pm
+    3. Return the latest hour in milliseconds
   */
-  private getLatestHour() {
-    const tempDate = new Date(this.date);
-    const day = tempDate.getDay();
+  private getLatestHour(date: Date) {
+    const day = date.getDay();
     if (day === 1 || day === 6) {
       return 17 * this.MILLISECONDS_IN_HOUR;
     } else {
@@ -256,24 +262,19 @@ export class AppointmentsModalComponent implements OnInit {
   }
 
   /*
-    GET COMPARISON Date
-    Return the correct date for us to check against the current date
-    1. Check if the date has been changed by user input or not
-    2. Set the time of the date to 17:00(For some reason JS starts counting hours of the day from 17:00)
-    3. Move the date one forward
-      (either it's one behind because the HTML input date is off by one day in milliseconds,
-      or the subtracted difference when resetting the date set it back a day)
-    4. Set the date to 00:00
-    5. Return the comparison date
+    SET TIME TO ZERO
+    Set the dateTime to 00:00, which will be used to see if the selected time and day are in the past
+    1. Get the current hour of the day
+    2. Find the difference between the date's time and 24(HTML date input valueAsNumber returns 1700 of the previous day)
+    2. Add the difference to the date time, setting it to 00:00
   */
-  private getComparisonDate(): number {
-    let tempDate = this.date;
-    if (tempDate % this.MILLISECONDS_IN_DAY !== 0) {
-      tempDate -= tempDate % this.MILLISECONDS_IN_DAY; // Set it to 17:00
+  private setTimeToZero(date: Date): Date {
+    const HOUR = date.getHours();
+    if (HOUR !== 0) {
+      const DIFFERENCE = (24 % date.getHours()) * this.MILLISECONDS_IN_HOUR;
+      this.dateTime += DIFFERENCE;
     }
-    tempDate += this.MILLISECONDS_IN_DAY;
-    tempDate -= 17 * this.MILLISECONDS_IN_HOUR;
-    return tempDate;
+    return new Date(this.dateTime);
   }
 }
 

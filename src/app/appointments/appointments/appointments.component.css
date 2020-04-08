@@ -17,6 +17,11 @@ h2 {
     display: inline-block;
 }
 
+
+.hidden {
+    visibility: hidden;
+}
+
 /* 2. Mobile Screens */
 
 /* 3. Large Screens */

@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input, OnChanges } from '@angular/core';
 import { MatDialog, MatDialogConfig } from '@angular/material/dialog';
 import { AppointmentsModalComponent } from '../appointments-modal/appointments-modal.component';
 
@@ -7,14 +7,21 @@ import { AppointmentsModalComponent } from '../appointments-modal/appointments-m
   templateUrl: './appointment-table.component.html',
   styleUrls: ['./appointment-table.component.css']
 })
-export class AppointmentTableComponent implements OnInit {
-  days: Array<object> = [];
-  hours: Array<number> = [];
-  today: Date;
+export class AppointmentTableComponent implements OnInit, OnChanges {
+  @Input() startDate: number;
+  days: Array<object>;
+  readonly hours: Array<number> = [8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18];
+  readonly MILLISECONDS_IN_HOUR: number;
+  readonly TODAY: number;
+
+  constructor(private matDialog: MatDialog) {
+    this.MILLISECONDS_IN_HOUR = 3600000;
+    this.TODAY = new Date().getTime();
+  }
 
   /*
-    CONSTRUCTOR
-    Set all of the variables not reliant on user input
+    NG ON CHANGES
+    Set all of the variables reliant upon the data being passed from the parent component.
     1. Set the current week's Monday to start the table display by:
       a. Getting the current date
       b. Getting the offset(currentDate.day - 1[because we're starting on Monday which is 1])
@@ -26,14 +33,13 @@ export class AppointmentTableComponent implements OnInit {
     4. Get the next day
     5. Repeat steps 2-4 until we've reached the end of the daysRef array(Saturday)
 
+    This method fires every time the @Input variables change
   */
-  constructor(public matDialog: MatDialog) {
+  ngOnChanges(): void {
+    this.days = [];
     const daysRef = ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'];
-    this.hours = [8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18];
     const MILLISECONDS_IN_DAY =  86400000;
-    this.today = new Date();
-    const offset = this.today.getDay() * MILLISECONDS_IN_DAY - MILLISECONDS_IN_DAY;
-    let dateIterator = this.today.getTime() - offset;
+    let dateIterator = this.startDate;
     for (const dayRef of daysRef) {
       this.days.push({
         formattedDate: `${dayRef} ${this.formatHeaderDate(dateIterator)}`,
@@ -43,8 +49,7 @@ export class AppointmentTableComponent implements OnInit {
     }
   }
 
-  ngOnInit(): void {
-  }
+  ngOnInit() {}
 
   /*
     FORMAT HEADER DATE
@@ -65,15 +70,9 @@ export class AppointmentTableComponent implements OnInit {
     Check if the current timeslot should be selectable or not
     1. Check if the day is before today
     2. Check if the hour is within the appropriate range(Mon&Sat: 8-5, Tue-Fri: 11-7)
-
-    TODO: Error check first two if-statements at different times of the day
   */
   possibleTimeslot(date: number, hour: number): boolean {
-    if (date < this.today.getTime()) {
-      return false;
-    }
-
-    if (date === this.today.getTime() && hour < this.today.getHours()) {
+    if (date + hour * this.MILLISECONDS_IN_HOUR < this.TODAY) {
       return false;
     }
 
@@ -105,8 +104,7 @@ export class AppointmentTableComponent implements OnInit {
     This method fires when the user selects a valid time cell
   */
   onOpenModal(date: number, time: number): void {
-    const MILLISECONDS_IN_HOUR = 3600000;
-    time = time * MILLISECONDS_IN_HOUR;
+    time = time * this.MILLISECONDS_IN_HOUR;
     const dialogConfig = new MatDialogConfig();
     dialogConfig.disableClose = false;
     dialogConfig.id = 'appointmentsModal';
