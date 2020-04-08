@@ -12,4 +12,7 @@ export class HeaderComponent implements OnInit {
   ngOnInit(): void {
   }
 
+  getIsLoggedIn(): boolean {
+    return sessionStorage.getItem('loggedIn') === 't';
+  }
 }

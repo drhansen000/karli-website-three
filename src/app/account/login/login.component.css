@@ -1,0 +1,11 @@
+/* 1. Screen Independent */
+section {
+    text-align: center;
+}
+
+/* 2. Mobile Screens */
+
+/* 3. Large Screens */
+@media (min-width: 800px) {
+
+}

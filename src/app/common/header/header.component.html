@@ -9,7 +9,11 @@
         <p>(208)969-0270</p>
     </div>
     <div id="headerLinks">
-        <a href="#" title="Manage your account">Your Account</a> | 
-        <a href="#" title="Manage your cart">Cart</a>
+
+        <a *ngIf="!getIsLoggedIn(); else loggedIn" routerLink="/login" title="Login to your account">Login</a>
+        <ng-template #loggedIn>
+            <a routerLink="/account" title="Manage your account">Your Account</a> | 
+            <a routerLink="/cart" title="Manage your cart">Cart</a>
+        </ng-template>
     </div>
 </header>

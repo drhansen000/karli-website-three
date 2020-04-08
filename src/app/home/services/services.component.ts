@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { ServicesListService } from 'src/app/servicesList.service';
 
 @Component({
   selector: 'app-services',
@@ -6,13 +7,14 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./services.component.css']
 })
 export class ServicesComponent implements OnInit {
-  services: Array<Service>;
-  constructor() {
-    this.services = [];
-  }
+  services = [];
+
+  constructor(private serviceListService: ServicesListService) {}
 
   ngOnInit(): void {
-    this.getServices('/assets/json/services.json');
+    this.serviceListService.getServices().subscribe((services) => {
+      this.services = services;
+    });
   }
 
   getServices(url): void {
@@ -39,12 +41,4 @@ export class ServicesComponent implements OnInit {
         console.log(error.message);
       });
   }
-}
-
-interface Service {
-  name: string;
-  image: string;
-  price: string;
-  duration: string;
-  description?: string;
 }

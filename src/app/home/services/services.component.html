@@ -2,8 +2,8 @@
     <h2>Services We Offer</h2>
     <button routerLink="/appointments" class="positiveButton">Create An Appointment</button>
     <ul id="services">
-        <li *ngFor="let service of services" class="service">
-            <a routerLink="/service" title="View details of {{ service.name }}">
+        <li *ngFor="let service of services; let i = index" class="service">
+            <a routerLink="/service/{{i}}" title="View details of {{ service.name }}">
                 <img [src]="service.image" alt="Example of {{ service.name }}">
                 <ul class="details">
                     <li class="detail">{{ service.name }}</li>

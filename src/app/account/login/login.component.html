@@ -1,1 +1,19 @@
-<p>login works!</p>
+<main>
+    <h1>Login</h1>
+    <section>
+        <div>
+            <label for="email">Email: </label>
+            <input type="email" name="email" [(ngModel)]="email" class="prettyBorder">
+        </div>
+        <div>
+            <label for="password">Password: </label>
+            <input type="password" name="password" [(ngModel)]="password" class="prettyBorder">
+        </div>
+        <button type="button" (click)="onLogin()" class="positiveButton" title="Login to account">Login</button>
+    </section>
+    <hr>
+    <section>
+        <h2>Don't have an Account?</h2>
+        <a routerLink="/registration" title="Register a new account">Create Account</a>
+    </section>
+</main>

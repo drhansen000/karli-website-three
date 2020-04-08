@@ -6,11 +6,6 @@ select {
     font-size: 2em;
 }
 
-.prettyBorder {
-    border: solid 2px #00A997;
-    border-radius: .3em;
-}
-
 .noBorder {
     border: 0;
 }
