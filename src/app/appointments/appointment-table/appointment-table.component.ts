@@ -13,10 +13,13 @@ export class AppointmentTableComponent implements OnInit, OnChanges {
   readonly hours: Array<number> = [8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18];
   readonly MILLISECONDS_IN_HOUR: number;
   readonly TODAY: number;
+  readonly EIGHT_WEEKS: number;
 
   constructor(private matDialog: MatDialog) {
+    const MILLISECONDS_IN_DAY = 86400000;
     this.MILLISECONDS_IN_HOUR = 3600000;
     this.TODAY = new Date().getTime();
+    this.EIGHT_WEEKS = MILLISECONDS_IN_DAY * 56;
   }
 
   /*
@@ -69,10 +72,15 @@ export class AppointmentTableComponent implements OnInit, OnChanges {
     POSSIBLE TIMESLOT
     Check if the current timeslot should be selectable or not
     1. Check if the day is before today
-    2. Check if the hour is within the appropriate range(Mon&Sat: 8-5, Tue-Fri: 11-7)
+    2. Check if the day is more than 8 weeks away
+    3. Check if the hour is within the appropriate range(Mon&Sat: 8-5, Tue-Fri: 11-7)
   */
   possibleTimeslot(date: number, hour: number): boolean {
     if (date + hour * this.MILLISECONDS_IN_HOUR < this.TODAY) {
+      return false;
+    }
+
+    if (date + hour * this.MILLISECONDS_IN_HOUR > this.TODAY + this.EIGHT_WEEKS) {
       return false;
     }
 

@@ -207,8 +207,6 @@ export class AppointmentsModalComponent implements OnInit {
       return false;
     }
 
-    console.log(this.getLatestHour(date) / this.MILLISECONDS_IN_HOUR);
-    console.log(this.endTime / this.MILLISECONDS_IN_HOUR);
     if (this.endTime > this.getLatestHour(date)) {
       console.log('Time ends after salon closes!');
       return false;
