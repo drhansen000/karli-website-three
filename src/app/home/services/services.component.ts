@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import { ServicesListService } from 'src/app/servicesList.service';
+import { ServiceListService } from 'src/app/service-list.service';
+import { Subscription } from 'rxjs';
+import { take } from 'rxjs/operators';
 
 @Component({
   selector: 'app-services',
@@ -9,36 +11,13 @@ import { ServicesListService } from 'src/app/servicesList.service';
 export class ServicesComponent implements OnInit {
   services = [];
 
-  constructor(private serviceListService: ServicesListService) {}
+  constructor(private serviceListService: ServiceListService) {}
 
   ngOnInit(): void {
-    this.serviceListService.getServices().subscribe((services) => {
-      this.services = services;
+    this.serviceListService.getServices()
+      .pipe(take(1)) // After the first value is returned, unsubscribe
+      .subscribe((services) => {
+        this.services = services;
     });
-  }
-
-  getServices(url): void {
-    fetch(url)
-      .then((response) => {
-        if (response.ok) {
-          return response.json();
-        } else {
-          throw new Error('ERROR: Problem fetching file');
-        }
-      })
-      .then((data) => {
-        data = data.Services;
-        for (const item of data) {
-          this.services.push({
-            name: item.name,
-            image: item.image,
-            price: item.price,
-            duration: item.duration
-          });
-        }
-      })
-      .catch((error) => {
-        console.log(error.message);
-      });
   }
 }

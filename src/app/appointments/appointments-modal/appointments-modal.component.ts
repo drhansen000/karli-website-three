@@ -1,5 +1,8 @@
 import { Component, OnInit, Inject } from '@angular/core';
 import { MAT_DIALOG_DATA } from '@angular/material/dialog';
+import { ServiceListService } from 'src/app/service-list.service';
+import { Subscription } from 'rxjs';
+import { take } from 'rxjs/operators';
 
 /*
   TODOS
@@ -27,9 +30,9 @@ export class AppointmentsModalComponent implements OnInit {
   startTime: number; // Start time input field listens for this
   endTime: number; // End time input field listens for this
   // Service variables
-  services: Array<Service>;
+  services = [];
   serviceIndex: number; // Service select field listens for this
-  selectedService: Service;
+  selectedService;
   price: string; // Price p elements listens for this
   // User variables (potentially passed in)
   name: string;
@@ -46,7 +49,7 @@ export class AppointmentsModalComponent implements OnInit {
     TODO:
       1. Optionally retrieve user data and store it into name and phone and/or email
   */
-  constructor(@Inject(MAT_DIALOG_DATA) public data) {
+  constructor(@Inject(MAT_DIALOG_DATA) public data, private serviceListService: ServiceListService) {
     this.TODAY = new Date().getTime();
     this.MILLISECONDS_IN_DAY = 86400000;
     this.MILLISECONDS_IN_HOUR = 3600000;
@@ -54,7 +57,6 @@ export class AppointmentsModalComponent implements OnInit {
     this.EIGHT_WEEKS = this.MILLISECONDS_IN_DAY * 56;
     this.dateTime = data.date;
     this.startTime = data.time;
-    this.services = [];
 
     this.name = '';
     this.phone = '';
@@ -65,47 +67,26 @@ export class AppointmentsModalComponent implements OnInit {
 
   /*
     NG ON INIT
-    Call getServices() which will get the ball rolling
+    Initialize all of the variables upon which our DOM relies
+    1. Subscribe to getServices() to populate our services array
+    2. Once we've retrieved our services
+      a. Store them in the services array
+      b. Unsubscribe to free up resources
+      c. Initialize the selectedService(If there's one in the Session use it, otherwise start with the first one)
+      d. Initialize the appointment's end time
   */
   ngOnInit(): void {
-    this.getServices('/assets/json/services.json');
-
-  }
-
-  /*
-    GET SERVICES
-    Get all of the Services, store them in an array, choose the default Service(if the user hasn't pre-selected one),
-    and then set the end time
-
-    This method fires once, at the beginning of the DOM creation
-  */
-  private getServices(url): void {
-    fetch(url)
-      .then((response) => {
-        if (response.ok) {
-          return response.json();
-        } else {
-          throw new Error('ERROR: Problem fetching file');
-        }
-      })
-      .then((data) => {
-        data = data.Services;
-        for (const item of data) {
-          this.services.push({
-            name: item.name,
-            image: item.image,
-            price: item.price,
-            duration: item.duration
-          });
-        }
-        this.serviceIndex = 0;
+    this.serviceListService.getServices()
+      .pipe(take(1)) // After the first value is returned, unsubscribe
+      .subscribe((services) => {
+        this.services = services;
+        const sessionService = sessionStorage.getItem('selectedService');
+        this.serviceIndex = (sessionService != null) ? sessionService as unknown as number : 0;
         this.selectedService = this.services[this.serviceIndex];
         this.price = this.selectedService.price;
         this.setEndTime();
-      })
-      .catch((error) => {
-        console.log(error.message);
-      });
+    });
+
   }
 
   /*
@@ -274,12 +255,4 @@ export class AppointmentsModalComponent implements OnInit {
     }
     return new Date(this.dateTime);
   }
-}
-
-interface Service {
-  name: string;
-  image: string;
-  price: string;
-  duration: number;
-  description?: string;
 }

@@ -6,7 +6,7 @@ import { catchError, tap } from 'rxjs/operators';
 @Injectable({
   providedIn: 'root'
 })
-export class ProductsListService {
+export class ProductListService {
   private products: Product[] = [];
   private url: string;
 
@@ -28,7 +28,7 @@ export class ProductsListService {
     if (this.products.length > 0) {
       return of(this.products);
     } else {
-      this.httpClient.get<Product[]>(this.url)
+      return this.httpClient.get<Product[]>(this.url)
         .pipe(
           tap((data) => {
             this.products = data;
@@ -40,13 +40,13 @@ export class ProductsListService {
 
   /*
     HANDLE ERROR
-    Handle an error made by an HttpClient method to the products.json
+    Handle an error made by an HttpClient method
     1. Display the error message in the console
     2. Return the current products array
   */
   private handleError(error: HttpErrorResponse) {
     console.error(error.message);
-    return this.products;
+    return of(this.products);
   }
 }
 

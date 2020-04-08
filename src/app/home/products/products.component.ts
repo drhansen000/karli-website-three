@@ -1,4 +1,7 @@
 import { Component, OnInit } from '@angular/core';
+import { ProductListService } from 'src/app/product-list.service';
+import { Subscription } from 'rxjs';
+import { take } from 'rxjs/operators';
 
 @Component({
   selector: 'app-products',
@@ -6,46 +9,16 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./products.component.css']
 })
 export class ProductsComponent implements OnInit {
-  products: Array<Product>;
+  products = [];
 
-  constructor() {
-    this.products = [];
-  }
+  constructor(private productListService: ProductListService) {}
 
   ngOnInit(): void {
-    this.getProducts('/assets/json/products.json');
+    this.productListService.getProducts()
+      .pipe(take(1))
+      .subscribe((products) => {
+        this.products = products;
+      }
+    );
   }
-
-  getProducts(url): void {
-    fetch(url)
-      .then((response) => {
-        if (response.ok) {
-          return response.json();
-        } else {
-          throw new Error('ERROR: Problem fetching file');
-        }
-      })
-      .then((data) => {
-        data = data.Products;
-        for (const item of data) {
-          this.products.push({
-            name: item.name,
-            image: item.image,
-            price: item.price,
-            size: item.size
-          });
-        }
-      })
-      .catch((error) => {
-        console.log(error.message);
-      });
-  }
-
-}
-
-interface Product {
-  name: string;
-  image: string;
-  price: number;
-  size: number;
 }
