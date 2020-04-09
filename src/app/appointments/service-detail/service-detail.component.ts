@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { ServiceListService } from 'src/app/service-list.service';
 import { take } from 'rxjs/operators';
 import { Service } from 'src/app/service';
+import { ActivatedRoute, Params } from '@angular/router';
 
 @Component({
   selector: 'app-service-detail',
@@ -10,17 +11,46 @@ import { Service } from 'src/app/service';
 })
 export class ServiceDetailComponent implements OnInit {
   service: Service;
-  constructor(private serviceListService: ServiceListService) { }
+  constructor(private serviceListService: ServiceListService, private route: ActivatedRoute) {}
 
+  /*
+    NG ON INIT
+    Initialize variables upon which the DOM is dependent
+    2. Get the id being passed via the url
+    1. Initialize our service by calling our getService method and passing it the recieved id
+  */
   ngOnInit(): void {
-    this.serviceListService.getService(0).pipe(take(1)).subscribe((service) => {
-      this.service = {
-        name: service.name,
-        imgUrl: service.imgUrl,
-        price: service.price,
-        duration: service.duration,
-        descriptions: service.descriptions
-      };
+    this.route.params.subscribe((params: Params) => {
+      const id = params.id;
+      this.getService(id);
+    });
+  }
+
+  /*
+    GET SERVICE
+    Use serviceListService to get the specific service
+    1. Use serviceListService's getService method
+    2. If we found a service
+      a. Set our service to the found service
+    3. Otherwise
+      a. Populate serviceListService's services array
+      b. Then call our function again
+  */
+  private getService(id: number): void {
+    this.serviceListService.getService(id).pipe(take(1)).subscribe((service) => {
+      if (service === null) {
+        this.serviceListService.getServices().pipe(take(1)).subscribe(() => {
+          this.getService(id);
+        });
+      } else {
+        this.service = {
+          name: service.name,
+          imgUrl: service.imgUrl,
+          price: service.price,
+          duration: service.duration,
+          descriptions: service.descriptions
+        };
+      }
     });
   }
 
