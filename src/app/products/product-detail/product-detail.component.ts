@@ -12,10 +12,10 @@ import { ProductListService } from 'src/app/product-list.service';
   styleUrls: ['./product-detail.component.css']
 })
 export class ProductDetailComponent implements OnInit, OnDestroy {
-  product: Product;
+  product: Product = {name: '', imgUrl: '', price: 0, size: 0};
   private paramsSubscription: Subscription;
 
-  constructor(private productListService: ProductListService, private route: ActivatedRoute) { }
+  constructor(private productListService: ProductListService, private route: ActivatedRoute) {}
 
   /*
     NG ON INIT

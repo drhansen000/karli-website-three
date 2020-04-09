@@ -12,7 +12,7 @@ import { ServiceListService } from 'src/app/service-list.service';
   styleUrls: ['./service-detail.component.css']
 })
 export class ServiceDetailComponent implements OnInit, OnDestroy {
-  service: Service;
+  service: Service = {name: '', imgUrl: '', price: '', duration: 0, descriptions: []};
   private id: number;
   private paramsSubscription: Subscription;
   constructor(private serviceListService: ServiceListService,

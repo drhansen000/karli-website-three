@@ -58,6 +58,8 @@ export class AppointmentsModalComponent implements OnInit {
     this.dateTime = data.date;
     this.startTime = data.time;
 
+    this.serviceIndex = 0;
+
     this.name = '';
     this.phone = '';
     this.email = '';
@@ -74,19 +76,31 @@ export class AppointmentsModalComponent implements OnInit {
       b. Unsubscribe to free up resources
       c. Initialize the selectedService(If there's one in the Session use it, otherwise start with the first one)
       d. Initialize the appointment's end time
+    3. If they're logged in, get their user information to auto-populate the input fields
   */
   ngOnInit(): void {
     this.serviceListService.getServices()
       .pipe(take(1)) // After the first value is returned, unsubscribe
       .subscribe((services) => {
         this.services = services;
-        const sessionService = sessionStorage.getItem('serviceId');
-        this.serviceIndex = (sessionService != null) ? sessionService as unknown as number : 0;
+        if (sessionStorage.getItem('serviceId') != null) {
+          // tslint:disable-next-line: no-unused-expression
+          sessionStorage.getItem('serviceId') as unknown as number;
+        }
         this.selectedService = this.services[this.serviceIndex];
         this.price = this.selectedService.price;
         this.setEndTime();
     });
+    if (sessionStorage.getItem('name') != null) {
+      this.name = sessionStorage.getItem('name');
+    }
+    if (sessionStorage.getItem('email') != null) {
+      this.email = sessionStorage.getItem('email');
+    }
 
+    if (sessionStorage.getItem('phone') != null) {
+      this.phone = sessionStorage.getItem('phone');
+    }
   }
 
   /*

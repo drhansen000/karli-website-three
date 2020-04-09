@@ -1,5 +1,7 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 import { Router } from '@angular/router';
+import { Subscription } from 'rxjs';
+import { AccountService } from '../account.service';
 /*
   TODO LIST
   1. Use Angular form handler
@@ -12,11 +14,17 @@ import { Router } from '@angular/router';
   templateUrl: './login.component.html',
   styleUrls: ['./login.component.css']
 })
-export class LoginComponent implements OnInit {
+export class LoginComponent implements OnInit, OnDestroy {
   email: string;
   password: string;
+  message: string;
+  private loginSubscription: Subscription;
 
-  constructor(private router: Router) { }
+  constructor(private router: Router, private accountService: AccountService) {
+    this.email = '';
+    this.password = '';
+    this.message = '';
+  }
 
   ngOnInit(): void {}
 
@@ -29,9 +37,20 @@ export class LoginComponent implements OnInit {
     This method fires once the user selects the login button
   */
   onLogin(): void {
-    console.log(this.email);
-    console.log(this.password);
-    sessionStorage.setItem('loggedIn', 't');
-    this.router.navigate(['/home']);
+    this.loginSubscription = this.accountService.login(this.email, this.password).subscribe((user) => {
+      if (user == null) {
+        this.message = 'Email or password is incorrect. Try again';
+      } else {
+        sessionStorage.setItem('name', user.name);
+        sessionStorage.setItem('email', user.email);
+        sessionStorage.setItem('phone', user.phone);
+        sessionStorage.setItem('loggedIn', 't');
+        this.router.navigate(['/home']);
+      }
+    });
+  }
+
+  ngOnDestroy(): void {
+    this.loginSubscription.unsubscribe();
   }
 }

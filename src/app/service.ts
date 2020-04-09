@@ -1,7 +1,7 @@
 export interface Service {
   name: string;
   imgUrl: string;
-  price: number;
+  price: string;
   duration: number;
   descriptions: string[];
 }

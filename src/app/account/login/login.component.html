@@ -1,6 +1,7 @@
 <main>
     <h1>Login</h1>
     <section>
+        <p *ngIf="message.length > 0" class="error">{{message}}</p>
         <div>
             <label for="email">Username: </label>
             <input type="email" name="email" [(ngModel)]="email" class="prettyBorder">

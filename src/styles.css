@@ -29,6 +29,10 @@ body {
     border-radius: .3em;
 }
 
+.error {
+    color: #FF0000;
+}
+
 /* 2. Mobile Screens */
 main {
     width: 90%;
