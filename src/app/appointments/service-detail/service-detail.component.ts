@@ -1,16 +1,18 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 import { ServiceListService } from 'src/app/service-list.service';
 import { take } from 'rxjs/operators';
 import { Service } from 'src/app/service';
 import { ActivatedRoute, Params } from '@angular/router';
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-service-detail',
   templateUrl: './service-detail.component.html',
   styleUrls: ['./service-detail.component.css']
 })
-export class ServiceDetailComponent implements OnInit {
+export class ServiceDetailComponent implements OnInit, OnDestroy {
   service: Service;
+  private paramsSubscription: Subscription;
   constructor(private serviceListService: ServiceListService, private route: ActivatedRoute) {}
 
   /*
@@ -20,7 +22,7 @@ export class ServiceDetailComponent implements OnInit {
     1. Initialize our service by calling our getService method and passing it the recieved id
   */
   ngOnInit(): void {
-    this.route.params.subscribe((params: Params) => {
+    this.paramsSubscription = this.route.params.subscribe((params: Params) => {
       const id = params.id;
       this.getService(id);
     });
@@ -34,7 +36,7 @@ export class ServiceDetailComponent implements OnInit {
       a. Set our service to the found service
     3. Otherwise
       a. Populate serviceListService's services array
-      b. Then call our function again
+      b. Then call our method again
   */
   private getService(id: number): void {
     this.serviceListService.getService(id).pipe(take(1)).subscribe((service) => {
@@ -52,6 +54,17 @@ export class ServiceDetailComponent implements OnInit {
         };
       }
     });
+  }
+
+  /*
+    NG ON DESTROY
+    Destroy any subscriptions
+    1. Destroy the ActivatedRoute's params subscription (It's automatically unsubscribed, but it's still good practice)
+
+    This method fires when the component is destroyed
+  */
+  ngOnDestroy() {
+    this.paramsSubscription.unsubscribe();
   }
 
 }

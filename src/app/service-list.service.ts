@@ -40,6 +40,12 @@ export class ServiceListService {
     }
   }
 
+  /*
+    GET SERVICE
+    Get an individual service from the services array
+    1. If the services array has been populated, return the desired service based on its index
+    2. Otherwise, return null
+  */
   getService(id: number): Observable<Service> {
     if (this.services.length > 0) {
       return of(this.services[id]);

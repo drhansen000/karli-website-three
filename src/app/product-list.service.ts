@@ -41,6 +41,20 @@ export class ProductListService {
   }
 
   /*
+    GET PRODUCT
+    Get an individual product from the products array
+    1. If the products array has been populated, return the desired product based on its index
+    2. Otherwise, return null
+  */
+ getProduct(id: number): Observable<Product> {
+  if (this.products.length > 0) {
+    return of(this.products[id]);
+  } else {
+    return of(null);
+  }
+}
+
+  /*
     HANDLE ERROR
     Handle an error made by an HttpClient method
     1. Display the error message in the console
