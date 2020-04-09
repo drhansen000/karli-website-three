@@ -80,7 +80,7 @@ export class AppointmentsModalComponent implements OnInit {
       .pipe(take(1)) // After the first value is returned, unsubscribe
       .subscribe((services) => {
         this.services = services;
-        const sessionService = sessionStorage.getItem('selectedService');
+        const sessionService = sessionStorage.getItem('serviceId');
         this.serviceIndex = (sessionService != null) ? sessionService as unknown as number : 0;
         this.selectedService = this.services[this.serviceIndex];
         this.price = this.selectedService.price;

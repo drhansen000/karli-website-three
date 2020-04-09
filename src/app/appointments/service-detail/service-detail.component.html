@@ -5,4 +5,5 @@
     <ul>
        <li *ngFor="let description of service.descriptions">{{ description }}</li> 
     </ul>
+    <button (click)="onCreateAppointment()" title="Schedule {{service.name}}" class="positiveButton">Create An Appointment</button>
 </main>

@@ -1,6 +1,5 @@
 import { Component, OnInit } from '@angular/core';
 import { ProductListService } from 'src/app/product-list.service';
-import { Subscription } from 'rxjs';
 import { take } from 'rxjs/operators';
 
 @Component({

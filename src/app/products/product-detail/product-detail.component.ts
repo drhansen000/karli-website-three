@@ -1,16 +1,17 @@
-import { Component, OnInit } from '@angular/core';
-import { Product } from 'src/app/product';
-import { ProductListService } from 'src/app/product-list.service';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 import { take } from 'rxjs/operators';
 import { Subscription } from 'rxjs';
 import { ActivatedRoute, Params } from '@angular/router';
+
+import { Product } from 'src/app/product';
+import { ProductListService } from 'src/app/product-list.service';
 
 @Component({
   selector: 'app-product-detail',
   templateUrl: './product-detail.component.html',
   styleUrls: ['./product-detail.component.css']
 })
-export class ProductDetailComponent implements OnInit {
+export class ProductDetailComponent implements OnInit, OnDestroy {
   product: Product;
   private paramsSubscription: Subscription;
 
@@ -23,7 +24,7 @@ export class ProductDetailComponent implements OnInit {
     2. Pass the id into the getProduct method
   */
   ngOnInit(): void {
-    this.route.params.subscribe((params: Params) => {
+    this.paramsSubscription = this.route.params.subscribe((params: Params) => {
       const id = params.id;
       this.getProduct(id);
     });
@@ -37,7 +38,7 @@ export class ProductDetailComponent implements OnInit {
       a. Set our product to the found product
     3. Otherwise
       a. Populate productListService's products array
-      b. Then call our method again
+      b. Call our method again
   */
  private getProduct(id: number): void {
   this.productListService.getProduct(id).pipe(take(1)).subscribe((product) => {
@@ -54,6 +55,10 @@ export class ProductDetailComponent implements OnInit {
       };
     }
   });
+}
+
+ngOnDestroy(): void {
+  this.paramsSubscription.unsubscribe();
 }
 
 }

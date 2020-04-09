@@ -1,7 +1,7 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
+
 import { HomeComponent } from './home/home.component';
-import { ProductListComponent } from './products/product-list/product-list.component';
 import { ContactComponent } from './contact/contact.component';
 import { HeaderComponent } from './common/header/header.component';
 import { NavComponent } from './common/nav/nav.component';
@@ -14,14 +14,16 @@ import { CartComponent } from './account/cart/cart.component';
 import { FutureAppointmentsComponent } from './account/future-appointments/future-appointments.component';
 import { RegistrationComponent } from './account/registration/registration.component';
 import { AppointmentsComponent } from './appointments/appointments/appointments.component';
+import { ProductPageComponent } from './products/product-page/product-page.component';
+
 
 const routes: Routes = [
   {path: 'home', component: HomeComponent},
   {path: 'appointments', component: AppointmentsComponent},
-  {path: 'products', component: ProductListComponent},
+  {path: 'products', component: ProductPageComponent},
   {path: 'contact', component: ContactComponent},
   {path: 'service/:id', component: ServiceDetailComponent},
-  {path: 'product/:id', component: ProductDetailComponent},
+  {path: 'products/:id', component: ProductDetailComponent},
   {path: 'cart', component: CartComponent},
   {path: 'login', component: LoginComponent},
   {path: 'registration', component: RegistrationComponent},
@@ -40,12 +42,12 @@ const routes: Routes = [
   ]
 })
 export class AppRoutingModule { }
-export const routingComponents = [HeaderComponent,
+export const routingComponents = [
+  HeaderComponent,
   NavComponent,
   FooterComponent,
   HomeComponent,
   AppointmentsComponent,
-  ProductListComponent,
   ContactComponent,
   CartComponent,
   LoginComponent,
@@ -53,5 +55,6 @@ export const routingComponents = [HeaderComponent,
   ProductDetailComponent,
   RegistrationComponent,
   FutureAppointmentsComponent,
-  AccountComponent
+  AccountComponent,
+  ProductPageComponent
 ];

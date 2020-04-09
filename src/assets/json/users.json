@@ -1,0 +1,50 @@
+[
+    {
+        "name": "Sample User A",
+        "email": "example1@example.com",
+        "phone": "1112223333",
+        "password": "Password.1"
+    },
+    {
+        "name": "Sample User B",
+        "email": "example2@example.com",
+        "phone": "1112223333",
+        "password": "Password.2"
+    },
+    {
+        "name": "Sample User C",
+        "email": "example3@example.com",
+        "phone": "1112223333",
+        "password": "Password.3"
+    },
+    {
+        "name": "Sample User D",
+        "email": "example4@example.com",
+        "phone": "1112223333",
+        "password": "Password.4"
+    },
+    {
+        "name": "Sample User E",
+        "email": "example5@example.com",
+        "phone": "1112223333",
+        "password": "Password.5"
+    },
+    {
+        "name": "Sample User F",
+        "email": "example6@example.com",
+        "phone": "1112223333",
+        "password": "Password.6"
+    },
+    {
+        "name": "Sample User G",
+        "email": "example7@example.com",
+        "phone": "1112223333",
+        "password": "Password.7"
+    },
+    {
+        "name": "Sample User H",
+        "email": "example8@example.com",
+        "phone": "1112223333",
+        "password": "Password.8"
+    }
+]

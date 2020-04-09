@@ -9,9 +9,9 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { AppComponent } from './app.component';
 import { AppRoutingModule, routingComponents } from './app-routing.module';
 import { ServicesComponent } from './home/services/services.component';
-import { ProductsComponent } from './home/products/products.component';
 import { AppointmentTableComponent } from './appointments/appointment-table/appointment-table.component';
 import { AppointmentsModalComponent } from './appointments/appointments-modal/appointments-modal.component';
+import { ProductsComponent } from './products/products/products.component';
 
 
 @NgModule({
@@ -19,9 +19,9 @@ import { AppointmentsModalComponent } from './appointments/appointments-modal/ap
     AppComponent,
     routingComponents,
     ServicesComponent,
-    ProductsComponent,
     AppointmentTableComponent,
-    AppointmentsModalComponent
+    AppointmentsModalComponent,
+    ProductsComponent
   ],
   imports: [
     BrowserModule,

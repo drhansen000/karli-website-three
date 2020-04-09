@@ -1,9 +1,10 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
-import { ServiceListService } from 'src/app/service-list.service';
 import { take } from 'rxjs/operators';
-import { Service } from 'src/app/service';
-import { ActivatedRoute, Params } from '@angular/router';
+import { ActivatedRoute, Params, Router } from '@angular/router';
 import { Subscription } from 'rxjs';
+
+import { Service } from 'src/app/service';
+import { ServiceListService } from 'src/app/service-list.service';
 
 @Component({
   selector: 'app-service-detail',
@@ -12,8 +13,11 @@ import { Subscription } from 'rxjs';
 })
 export class ServiceDetailComponent implements OnInit, OnDestroy {
   service: Service;
+  private id: number;
   private paramsSubscription: Subscription;
-  constructor(private serviceListService: ServiceListService, private route: ActivatedRoute) {}
+  constructor(private serviceListService: ServiceListService,
+              private route: ActivatedRoute,
+              private router: Router) {}
 
   /*
     NG ON INIT
@@ -23,8 +27,8 @@ export class ServiceDetailComponent implements OnInit, OnDestroy {
   */
   ngOnInit(): void {
     this.paramsSubscription = this.route.params.subscribe((params: Params) => {
-      const id = params.id;
-      this.getService(id);
+      this.id = params.id;
+      this.getService(this.id);
     });
   }
 
@@ -36,7 +40,7 @@ export class ServiceDetailComponent implements OnInit, OnDestroy {
       a. Set our service to the found service
     3. Otherwise
       a. Populate serviceListService's services array
-      b. Then call our method again
+      b. Call our method again
   */
   private getService(id: number): void {
     this.serviceListService.getService(id).pipe(take(1)).subscribe((service) => {
@@ -54,6 +58,11 @@ export class ServiceDetailComponent implements OnInit, OnDestroy {
         };
       }
     });
+  }
+
+  onCreateAppointment() {
+    sessionStorage.setItem('serviceId', '' + this.id);
+    this.router.navigate(['/appointments']);
   }
 
   /*
