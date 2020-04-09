@@ -1,7 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { ServiceListService } from 'src/app/service-list.service';
-import { Subscription } from 'rxjs';
 import { take } from 'rxjs/operators';
+
+import { Service } from 'src/app/service';
 
 @Component({
   selector: 'app-services',
@@ -9,7 +10,7 @@ import { take } from 'rxjs/operators';
   styleUrls: ['./services.component.css']
 })
 export class ServicesComponent implements OnInit {
-  services = [];
+  services: Service[] = [];
 
   constructor(private serviceListService: ServiceListService) {}
 

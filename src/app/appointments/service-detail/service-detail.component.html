@@ -1,1 +1,8 @@
-<p>service-detail works!</p>
+<main>
+    <h1>{{service.name}}</h1>
+    <img src="{{ service.imgUrl }}" alt="Example of {{ service.name }}">
+    <p>${{ service.price }}</p>
+    <ul>
+       <li *ngFor="let description of service.descriptions">{{ description }}</li> 
+    </ul>
+</main>

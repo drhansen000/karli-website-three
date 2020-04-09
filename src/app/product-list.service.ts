@@ -3,6 +3,8 @@ import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { Observable, of } from 'rxjs';
 import { catchError, tap } from 'rxjs/operators';
 
+import { Product } from './product';
+
 @Injectable({
   providedIn: 'root'
 })
@@ -48,11 +50,4 @@ export class ProductListService {
     console.error(error.message);
     return of(this.products);
   }
-}
-
-interface Product {
-  name: string;
-  imageUrl: string;
-  price: number;
-  size: number;
 }

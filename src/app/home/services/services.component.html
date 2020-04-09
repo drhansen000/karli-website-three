@@ -4,7 +4,7 @@
     <ul id="services">
         <li *ngFor="let service of services; let i = index" class="service">
             <a routerLink="/service/{{i}}" title="View details of {{ service.name }}">
-                <img [src]="service.image" alt="Example of {{ service.name }}">
+                <img [src]="service.imgUrl" alt="Example of {{ service.name }}">
                 <ul class="details">
                     <li class="detail">{{ service.name }}</li>
                     <li class="detail">${{ service.price }}</li>

@@ -3,7 +3,7 @@
     <ul id="products">
         <li *ngFor="let product of products; let i = index" class="product">
             <a routerLink="/product/{{i}}" title="View details of {{ product.name }}">
-                <img [src]="product.image" alt="Example of {{ product.name }}">
+                <img [src]="product.imgUrl" alt="Example of {{ product.name }}">
                 <ul class="details">
                     <li class="detail">{{ product.name }}</li>
                     <li class="detail">${{ product.price }}</li>

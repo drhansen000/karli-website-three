@@ -1,7 +1,9 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { Observable, of } from 'rxjs';
-import { catchError, tap } from 'rxjs/operators';
+import { catchError, tap, take } from 'rxjs/operators';
+
+import { Service } from './service';
 
 @Injectable({
   providedIn: 'root'
@@ -38,6 +40,20 @@ export class ServiceListService {
     }
   }
 
+  getService(id: number): Observable<Service> {
+    if (this.services.length > 0) {
+      return of(this.services[id]);
+    } else {
+      this.getServices().pipe(take(1)).subscribe((services) => {
+        if (this.services.length > 0) {
+          return of(services[id]);
+        } else {
+          return null;
+        }
+      });
+    }
+  }
+
   /*
     HANDLE ERROR
     Handle an error made by an HttpClient method
@@ -48,11 +64,4 @@ export class ServiceListService {
     console.error(error.message);
     return of(this.services);
   }
-}
-
-interface Service {
-  name: string;
-  imageUrl: string;
-  price: number;
-  size: number;
 }

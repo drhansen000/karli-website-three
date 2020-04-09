@@ -1,83 +1,83 @@
 [{
     "name": "Women's Cut",
-    "image": "/assets/images/woman-cut.jpg",
+    "imgUrl": "/assets/images/woman-cut.jpg",
     "price": "30",
     "duration": 60,
-    "description": [
+    "descriptions": [
       "Cut, wash, and five-minute style"
     ]
   },
   {
     "name": "Trim",
-    "image": "/assets/images/placeholder.jpg",
+    "imgUrl": "/assets/images/placeholder.jpg",
     "price": "15",
     "duration": 15,
-    "description": [
+    "descriptions": [
       "Cut bottom length or fringe only",
       "No wash or style but can be added on"
     ]
   },
   {
     "name": "Men's Cut",
-    "image": "/assets/images/men-cut.jpg",
+    "imgUrl": "/assets/images/men-cut.jpg",
     "price": "15",
     "duration": 30,
-    "description": [
+    "descriptions": [
       "Cut, wash, and style"
     ]
   },
   {
     "name": "Buzz Cut",
-    "image": "/assets/images/placeholder.jpg",
+    "imgUrl": "/assets/images/placeholder.jpg",
     "price": "10",
     "duration": 15,
-    "description": [
+    "descriptions": [
       "Cut with clippers only",
       "Wash and style"
     ]
   },
   {
     "name": "Child's Cut (girl)",
-    "image": "/assets/images/placeholder.jpg",
+    "imgUrl": "/assets/images/placeholder.jpg",
     "price": "25",
     "duration": 60,
-    "description": [
+    "descriptions": [
       "Cut, wash, and five-minute style"
     ]
   },
   {
     "name": "Child's Cut (boy)",
-    "image": "/assets/images/placeholder.jpg",
+    "imgUrl": "/assets/images/placeholder.jpg",
     "price": "10",
     "duration": 45,
-    "description": [
+    "descriptions": [
       "Cut, wash, and style"
     ]
   },
   {
     "name": "Wash Add-on",
-    "image": "/assets/images/placeholder.jpg",
+    "imgUrl": "/assets/images/placeholder.jpg",
     "price": "5",
     "duration": 30,
-    "description": [
+    "descriptions": [
       "Wash and blow dry"
     ]
   },
   {
     "name": "Five-Minute Style Add-on",
-    "image": "/assets/images/placeholder.jpg",
+    "imgUrl": "/assets/images/placeholder.jpg",
     "price": "5",
     "duration": 5,
-    "description": [
+    "descriptions": [
       "Curl, straightening, or braid"
     ]
   },
   {
     "name": "Scalp Treatment",
-    "image": "/assets/images/placeholder.jpg",
+    "imgUrl": "/assets/images/placeholder.jpg",
     "price": "20",
     "duration": 30,
-    "description": [
+    "descriptions": [
       "Brush away dead skin from scalp",
       "Distribute extra natural oils to ends of hair",
       "Massage head with scalp treatment product for ten minutes",
@@ -87,10 +87,10 @@
   },
   {
     "name": "Deep Condition",
-    "image": "/assets/images/placeholder.jpg",
+    "imgUrl": "/assets/images/placeholder.jpg",
     "price": "15",
     "duration": 20,
-    "description": [
+    "descriptions": [
       "Wash",
       "Apply deep conditioning product",
       "Deep conditioning product will be decided upon consultation about your hair needs",
@@ -100,19 +100,19 @@
   },
   {
     "name": "Simple Style",
-    "image": "/assets/images/placeholder.jpg",
+    "imgUrl": "/assets/images/placeholder.jpg",
     "price": "20",
     "duration": 20,
-    "description": [
+    "descriptions": [
       "Curl, straighten, or 1-2 braids"
     ]
   },
   {
     "name": "Special Occasion Style",
-    "image": "/assets/images/placeholder.jpg",
+    "imgUrl": "/assets/images/placeholder.jpg",
     "price": "50 plus $15 every extra hour over 3 hours",
     "duration": 180,
-    "description": [
+    "descriptions": [
       "Set up consultation before coming in",
       "Starts at $50 for the first 3 hours",
       "Each additional hour is $15"
