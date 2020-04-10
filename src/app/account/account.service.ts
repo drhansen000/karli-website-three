@@ -1,33 +1,46 @@
 import { Injectable } from '@angular/core';
 import { Observable, of, from } from 'rxjs';
-import { HttpClient } from '@angular/common/http';
+
 import { User } from './user';
+import { CartItem } from './cart-item';
 
 @Injectable({
   providedIn: 'root'
 })
 export class AccountService {
-  private url: string;
+  private usersUrl = '/assets/json/users.json';
+  private cartsUrl = '/assets/json/carts.json';
+  private user: User = {
+    name: '',
+    phone: '',
+    email: '',
+    password: '',
+    cartId: -1
+  };
 
-  constructor(private httpClient: HttpClient) {
-    this.url = '/assets/json/users.json';
-   }
+  cart: CartItem[] = [];
 
    /*
-     LOGIN
-     Return the user
+    LOGIN
+    If the password and email are correct, then store the user and its information. Either way, notify the client
+    1. Fetch the users repository
+    2. Find a user with the passed email
+    3. Check that the user's password matches the passed password
+    4. Store the user
+    5. Get the user's cart
+    6. Return the result of steps 1-3
    */
-  login(email: string, password: string): Observable<User> {
-    return from(fetch(this.url)
+  login(email: string, password: string): Observable<boolean> {
+    return from(fetch(this.usersUrl)
       .then((response) => {
         if (response.ok) {
           return response.json();
         }
-        throw new Error('Error occurred trying to fetch file at: ' + this.url);
+        throw new Error('Error occurred trying to fetch file at: ' + this.usersUrl);
       })
       .then((users) => {
         // Find the user in the repository
-        let matchedUser = null;
+        let matchedUser: User = null;
         for (const user of users) {
           if (user.email === email) {
             matchedUser = user;
@@ -36,20 +49,21 @@ export class AccountService {
         }
 
         if (matchedUser === null) { // Couldn't find them
-          return null;
+          return false;
         }
 
         // Check against the user's password
         if (matchedUser.password === password) {
-          // Don't reveal the password more than we need to
-          matchedUser = {name: matchedUser.name, phone: matchedUser.phone, email: matchedUser.email, password: ''};
-          return matchedUser;
+          this.user = matchedUser; // Store the user data
+          this.getCart(this.user.cartId);
+          return true;
         } else {
-          return null;
+          return false;
         }
       })
       .catch((error: Error) => {
         console.error(error.message);
+        return false;
       }));
   }
 
@@ -61,12 +75,12 @@ export class AccountService {
   */
   registerUser(name: string, email: string, phone: string, password: string): Observable<string> {
     let message = '';
-    return from(fetch(this.url)
+    return from(fetch(this.usersUrl)
       .then((response => {
         if (response.ok) {
           return response.json();
         }
-        throw new Error('Error occurred trying to fetch at: ' + this.url);
+        throw new Error('Error occurred trying to fetch at: ' + this.usersUrl);
       }))
       .then((users) => {
         for (const user of users) {
@@ -83,5 +97,40 @@ export class AccountService {
         message = 'We were unable to process your request';
         return(message);
       }));
+  }
+
+  /*
+    GET CART
+    Get the current user's cart
+    1. Get the cart.json
+    2. Convert it into an object(in this case an array of arrays of Product)
+    3. Find the cart array within outer array
+    4. Store the found cart array within our account service
+  */
+  getCart(cartId: number): void {
+    fetch(this.cartsUrl)
+      .then((response) => {
+        if (response.ok) {
+          return response.json();
+        }
+        throw new Error('Error occurred trying to fetch at: ' + this.cartsUrl);
+      })
+      .then((carts) => {
+        this.cart = carts[cartId];
+        return this.cart;
+      })
+      .catch((error: Error) => {
+        console.error(error.message);
+        return this.cart;
+      });
+  }
+
+  /*
+    GET USER
+    Get the user from our service
+    1. Return the user currently stored in the account service
+  */
+  getUser(): User {
+    return this.user;
   }
 }

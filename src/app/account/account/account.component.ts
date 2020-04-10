@@ -1,4 +1,7 @@
 import { Component, OnInit } from '@angular/core';
+import { User } from '../user';
+import { AccountService } from '../account.service';
+import { Router } from '@angular/router';
 
 /*
   TODO LIST
@@ -12,8 +15,10 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./account.component.css']
 })
 export class AccountComponent implements OnInit {
-
-  constructor() { }
+  user: User;
+  constructor(private accountService: AccountService, private router: Router) {
+    this.user = accountService.getUser();
+  }
 
   ngOnInit(): void {
   }
@@ -29,6 +34,7 @@ export class AccountComponent implements OnInit {
   */
   onLogout(): void {
     sessionStorage.setItem('loggedIn', 'f');
+    this.router.navigate(['/login']);
   }
 
 }

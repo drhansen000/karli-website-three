@@ -3,4 +3,5 @@ export interface User {
     phone: string;
     email: string;
     password: string;
+    cartId: number;
 }

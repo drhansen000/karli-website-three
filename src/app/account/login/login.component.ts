@@ -37,13 +37,10 @@ export class LoginComponent implements OnInit, OnDestroy {
     This method fires once the user selects the login button
   */
   onLogin(): void {
-    this.loginSubscription = this.accountService.login(this.email, this.password).subscribe((user) => {
-      if (user == null) {
+    this.loginSubscription = this.accountService.login(this.email, this.password).subscribe((success) => {
+      if (success === false) {
         this.message = 'Email or password is incorrect. Try again';
       } else {
-        sessionStorage.setItem('name', user.name);
-        sessionStorage.setItem('email', user.email);
-        sessionStorage.setItem('phone', user.phone);
         sessionStorage.setItem('loggedIn', 't');
         this.router.navigate(['/home']);
       }

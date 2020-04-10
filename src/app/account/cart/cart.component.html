@@ -1,1 +1,12 @@
-<p>cart works!</p>
+<main>
+    <h1>Your Cart</h1>
+    <ul id="cart">
+        <li *ngFor="let item of cart; let i = index">
+            <span>{{products[item.productId].name}}</span>
+            <span>#: {{item.quantity}}</span>
+            <span>${{item.quantity * products[item.productId].price}}</span>
+            <button type="button" title="Delete item from cart" class="negativeButton" (click)="onDeleteItem(i)">Delete</button>
+        </li>
+    </ul>
+    <button type="button" title="Checkout" (click)="onCheckout()" class="positiveButton">Checkout</button>
+</main>

@@ -4,6 +4,8 @@ import { ServiceListService } from 'src/app/service-list.service';
 import { Subscription } from 'rxjs';
 import { take } from 'rxjs/operators';
 import { Service } from 'src/app/service';
+import { User } from 'src/app/account/user';
+import { AccountService } from 'src/app/account/account.service';
 
 /*
   TODOS
@@ -22,26 +24,26 @@ import { Service } from 'src/app/service';
 })
 export class AppointmentsModalComponent implements OnInit {
   // Time variables
-  private readonly TODAY: number;
-  private readonly MILLISECONDS_IN_DAY: number;
-  private readonly MILLISECONDS_IN_HOUR: number;
-  private readonly MILLISECONDS_IN_MINUTE: number;
-  private readonly EIGHT_WEEKS: number;
+  private readonly TODAY = new Date().getTime();
+  private readonly MILLISECONDS_IN_DAY = 86400000;
+  private readonly MILLISECONDS_IN_HOUR = 3600000;
+  private readonly MILLISECONDS_IN_MINUTE = 60000;
+  private readonly EIGHT_WEEKS = this.MILLISECONDS_IN_DAY * 56;
   dateTime: number; // Date input field listens for this
   startTime: number; // Start time input field listens for this
   endTime: number; // End time input field listens for this
   // Service variables
   services = [];
-  serviceIndex: number; // Service select field listens for this
+  serviceIndex = 0; // Service select field listens for this
   selectedService: Service;
   price: string; // Price p elements listens for this
   // User variables (potentially passed in)
-  name: string;
-  phone: string;
-  email: string;
+  name = '';
+  phone = '';
+  email = '';
   // Other Appointment variables
-  picture: string;
-  comments: string;
+  picture = '';
+  comments = '';
 
   /*
     CONSTRUCTOR
@@ -50,22 +52,11 @@ export class AppointmentsModalComponent implements OnInit {
     TODO:
       1. Optionally retrieve user data and store it into name and phone and/or email
   */
-  constructor(@Inject(MAT_DIALOG_DATA) public data, private serviceListService: ServiceListService) {
-    this.TODAY = new Date().getTime();
-    this.MILLISECONDS_IN_DAY = 86400000;
-    this.MILLISECONDS_IN_HOUR = 3600000;
-    this.MILLISECONDS_IN_MINUTE = 60000;
-    this.EIGHT_WEEKS = this.MILLISECONDS_IN_DAY * 56;
+  constructor(@Inject(MAT_DIALOG_DATA) public data,
+              private serviceListService: ServiceListService,
+              private accountService: AccountService) {
     this.dateTime = data.date;
     this.startTime = data.time;
-
-    this.serviceIndex = 0;
-
-    this.name = '';
-    this.phone = '';
-    this.email = '';
-    this.picture = '';
-    this.comments = '';
   }
 
   /*
@@ -91,16 +82,11 @@ export class AppointmentsModalComponent implements OnInit {
         this.price = this.selectedService.price;
         this.setEndTime();
     });
-    if (sessionStorage.getItem('name') != null) {
-      this.name = sessionStorage.getItem('name');
-    }
-    if (sessionStorage.getItem('email') != null) {
-      this.email = sessionStorage.getItem('email');
-    }
 
-    if (sessionStorage.getItem('phone') != null) {
-      this.phone = sessionStorage.getItem('phone');
-    }
+    const user = this.accountService.getUser();
+    this.name = user.name;
+    this.phone = user.phone;
+    this.email = user.email;
   }
 
   /*
