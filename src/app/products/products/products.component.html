@@ -1,7 +1,7 @@
 <section>
     <h2>Products We Offer</h2>
     <ul id="products">
-        <li *ngFor="let product of products; let i = index" class="product">
+        <li *ngFor="let product of products; let i = index" class="thumbnail">
             <a routerLink="/products/{{i}}" title="View details of {{ product.name }}">
                 <img [src]="product.imgUrl" alt="Example of {{ product.name }}">
                 <ul class="details">

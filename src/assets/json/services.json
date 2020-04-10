@@ -1,7 +1,7 @@
 [{
     "name": "Women's Cut",
     "imgUrl": "/assets/images/woman-cut.jpg",
-    "price": "30",
+    "price": "$30",
     "duration": 60,
     "descriptions": [
       "Cut, wash, and five-minute style"
@@ -9,8 +9,8 @@
   },
   {
     "name": "Trim",
-    "imgUrl": "/assets/images/placeholder.jpg",
-    "price": "15",
+    "imgUrl": "/assets/images/trim.jpg",
+    "price": "$15",
     "duration": 15,
     "descriptions": [
       "Cut bottom length or fringe only",
@@ -20,7 +20,7 @@
   {
     "name": "Men's Cut",
     "imgUrl": "/assets/images/men-cut.jpg",
-    "price": "15",
+    "price": "$15",
     "duration": 30,
     "descriptions": [
       "Cut, wash, and style"
@@ -28,8 +28,8 @@
   },
   {
     "name": "Buzz Cut",
-    "imgUrl": "/assets/images/placeholder.jpg",
-    "price": "10",
+    "imgUrl": "/assets/images/buzz-cut.jpg",
+    "price": "$10",
     "duration": 15,
     "descriptions": [
       "Cut with clippers only",
@@ -38,8 +38,8 @@
   },
   {
     "name": "Child's Cut (girl)",
-    "imgUrl": "/assets/images/placeholder.jpg",
-    "price": "25",
+    "imgUrl": "/assets/images/child-cut-girl.jpg",
+    "price": "$25",
     "duration": 60,
     "descriptions": [
       "Cut, wash, and five-minute style"
@@ -47,8 +47,8 @@
   },
   {
     "name": "Child's Cut (boy)",
-    "imgUrl": "/assets/images/placeholder.jpg",
-    "price": "10",
+    "imgUrl": "/assets/images/child-cut-boy.jpg",
+    "price": "$10",
     "duration": 45,
     "descriptions": [
       "Cut, wash, and style"
@@ -56,8 +56,8 @@
   },
   {
     "name": "Wash Add-on",
-    "imgUrl": "/assets/images/placeholder.jpg",
-    "price": "5",
+    "imgUrl": "/assets/images/wash-addon2.jpg",
+    "price": "$5",
     "duration": 30,
     "descriptions": [
       "Wash and blow dry"
@@ -65,8 +65,8 @@
   },
   {
     "name": "Five-Minute Style Add-on",
-    "imgUrl": "/assets/images/placeholder.jpg",
-    "price": "5",
+    "imgUrl": "/assets/images/style-addon1.jpg",
+    "price": "$5",
     "duration": 5,
     "descriptions": [
       "Curl, straightening, or braid"
@@ -74,8 +74,8 @@
   },
   {
     "name": "Scalp Treatment",
-    "imgUrl": "/assets/images/placeholder.jpg",
-    "price": "20",
+    "imgUrl": "/assets/images/scalp-treatment.jpg",
+    "price": "$20",
     "duration": 30,
     "descriptions": [
       "Brush away dead skin from scalp",
@@ -87,8 +87,8 @@
   },
   {
     "name": "Deep Condition",
-    "imgUrl": "/assets/images/placeholder.jpg",
-    "price": "15",
+    "imgUrl": "/assets/images/deep-condition.jpg",
+    "price": "$15",
     "duration": 20,
     "descriptions": [
       "Wash",
@@ -100,8 +100,8 @@
   },
   {
     "name": "Simple Style",
-    "imgUrl": "/assets/images/placeholder.jpg",
-    "price": "20",
+    "imgUrl": "/assets/images/simple-style.jpg",
+    "price": "$20",
     "duration": 20,
     "descriptions": [
       "Curl, straighten, or 1-2 braids"
@@ -109,13 +109,101 @@
   },
   {
     "name": "Special Occasion Style",
-    "imgUrl": "/assets/images/placeholder.jpg",
-    "price": "50 plus $15 every extra hour over 3 hours",
+    "imgUrl": "/assets/images/special-style.jpg",
+    "price": "$50 plus $15 every extra hour over 3 hours",
     "duration": 180,
     "descriptions": [
       "Set up consultation before coming in",
       "Starts at $50 for the first 3 hours",
       "Each additional hour is $15"
+    ]
+  },
+  {
+    "name": "Highlights",
+    "imgUrl": "/assets/images/highlight1.jpg",
+    "price": "Starts at $80",
+    "duration": 240,
+    "descriptions": [
+      "Classic highlights, balayage, hombre, etc. (Anything that would require your hair to be lighter than what it currently is)",
+      "If you have used box dye for months or years, you may need a color correction",
+      "$15 for each remix of product",
+      "Wash and style included"
+    ]
+  },
+  {
+    "name": "Color",
+    "imgUrl": "/assets/images/color.jpg",
+    "price": "Starts at $50",
+    "duration": 120,
+    "descriptions": [
+      "Time dependant on hair length",
+      "No highlights, just color",
+      "$15 for each remix of product",
+      "Wash and style included"
+    ]
+  },
+  {
+    "name": "Color Correction",
+    "imgUrl": "/assets/images/color-correction.jpg",
+    "price": "Starts at $100",
+    "duration": 360,
+    "descriptions": [
+      "Time dependant on hair length and complexity of the fix required",
+      "$15 for each remix of product",
+      "Wash and style included"
+    ]
+  },
+  {
+    "name": "Perm",
+    "imgUrl": "/assets/images/perm2.jpg",
+    "price": "$30-60",
+    "duration": 120,
+    "descriptions": [
+      "Time dependant on hair length and style of perm",
+      "$30 short: Hair length above chin",
+      "$45 regular: Hair length between chin and shoulder",
+      "$60 Spiral: Hair length below shoulder"
+    ]
+  },
+  {
+    "name": "Manicure",
+    "imgUrl": "/assets/images/manicure.jpg",
+    "price": "$35",
+    "duration": 35,
+    "descriptions": [
+      "Regular polish included",
+      "Add gel polish for $5",
+      "Add nail art for $3 per nail",
+      "Add glitter nails for $1 per nail",
+      "Includes nail prep and care, hand massage, and parafin wax dip"
+    ]
+  },
+  {
+    "name": "Pedicure",
+    "imgUrl": "/assets/images/pedicure.jpg",
+    "price": "$45",
+    "duration": 45,
+    "descriptions": [
+      "Regular polish included",
+      "Add gel polish for $5",
+      "Add nail art for $3 per nail",
+      "Add glitter nails for $1 per nail",
+      "Includes nail prep and care, foot scrub and callus removal, foot and leg massage, and parafin wax dip"
+    ]
+  },
+  {
+    "name": "Full Set Nail Enhancements",
+    "imgUrl": "/assets/images/nail-enhancement.jpg",
+    "price": "$35-50",
+    "duration": 60,
+    "descriptions": [
+      "New full set nail extensions(one color): $50",
+      "New full set nail overlay(one color): $35",
+      "Nail fill: $25",
+      "Brokennail fix: $10 per natural nail or $5 per artificial nail",
+      "Add gel polish for $5",
+      "Add nail art for $3 per nail",
+      "Add glitter nails for $1 per nail"
     ]
   }
 ]
