@@ -51,6 +51,37 @@ export class AccountService {
       .catch((error: Error) => {
         console.error(error.message);
       }));
+  }
 
+  /*
+    REGISTER USER
+    Create a user based on the information provided
+    1. Check that the email doesn't already exist
+    2. Insert the user's information into the repository
+  */
+  registerUser(name: string, email: string, phone: string, password: string): Observable<string> {
+    let message = '';
+    return from(fetch(this.url)
+      .then((response => {
+        if (response.ok) {
+          return response.json();
+        }
+        throw new Error('Error occurred trying to fetch at: ' + this.url);
+      }))
+      .then((users) => {
+        for (const user of users) {
+          if (user.email === email) {
+            message = 'You already have an account!';
+            return(message);
+          }
+        }
+        message = 'You have successfully created your account. Please login';
+        return(message);
+      })
+      .catch((error: Error) => {
+        console.error(error.message);
+        message = 'We were unable to process your request';
+        return(message);
+      }));
   }
 }

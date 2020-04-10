@@ -3,6 +3,7 @@ import { MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { ServiceListService } from 'src/app/service-list.service';
 import { Subscription } from 'rxjs';
 import { take } from 'rxjs/operators';
+import { Service } from 'src/app/service';
 
 /*
   TODOS
@@ -32,7 +33,7 @@ export class AppointmentsModalComponent implements OnInit {
   // Service variables
   services = [];
   serviceIndex: number; // Service select field listens for this
-  selectedService;
+  selectedService: Service;
   price: string; // Price p elements listens for this
   // User variables (potentially passed in)
   name: string;
@@ -84,8 +85,7 @@ export class AppointmentsModalComponent implements OnInit {
       .subscribe((services) => {
         this.services = services;
         if (sessionStorage.getItem('serviceId') != null) {
-          // tslint:disable-next-line: no-unused-expression
-          sessionStorage.getItem('serviceId') as unknown as number;
+          this.serviceIndex = sessionStorage.getItem('serviceId') as unknown as number;
         }
         this.selectedService = this.services[this.serviceIndex];
         this.price = this.selectedService.price;
