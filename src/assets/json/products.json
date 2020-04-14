@@ -1,55 +1,64 @@
 [{
     "name": "Tea Tree Shampoo",
     "imgUrl": "/assets/images/placeholder.jpg",
-    "price": "10",
-    "size": "16"
+    "price": 10,
+    "size": 16,
+    "quantity": 4
   },
   {
     "name": "Tea Tree Conditioner",
     "imgUrl": "/assets/images/placeholder.jpg",
-    "price": "10",
-    "size": "16"
+    "price": 10,
+    "size": 16,
+    "quantity": 4
   },
   {
     "name": "Dove Soap",
     "imgUrl": "/assets/images/placeholder.jpg",
-    "price": "10",
-    "size": "16"
+    "price": 10,
+    "size": 16,
+    "quantity": 4
   },
   {
     "name": "Hairspray",
     "imgUrl": "/assets/images/placeholder.jpg",
-    "price": "10",
-    "size": "16"
+    "price": 10,
+    "size": 16,
+    "quantity": 4
   },
   {
     "name": "Hair Protectant",
     "imgUrl": "/assets/images/placeholder.jpg",
-    "price": "10",
-    "size": "16"
+    "price": 10,
+    "size": 16,
+    "quantity": 4
   },
   {
     "name": "Other Shampoo",
     "imgUrl": "/assets/images/placeholder.jpg",
-    "price": "10",
-    "size": "16"
+    "price": 10,
+    "size": 16,
+    "quantity": 4
   },
   {
     "name": "Other Conditioner",
     "imgUrl": "/assets/images/placeholder.jpg",
-    "price": "10",
-    "size": "16"
+    "price": 10,
+    "size": 16,
+    "quantity": 4
   },
   {
     "name": "Even More Shampoo",
     "imgUrl": "/assets/images/placeholder.jpg",
-    "price": "10",
-    "size": "16"
+    "price": 10,
+    "size": 16,
+    "quantity": 4
   },
   {
     "name": "Even More Conditioner",
     "imgUrl": "/assets/images/placeholder.jpg",
-    "price": "10",
-    "size": "16"
+    "price": 10,
+    "size": 16,
+    "quantity": 4
   }
 ]

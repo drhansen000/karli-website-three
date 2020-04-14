@@ -3,4 +3,5 @@ export interface Product {
   imgUrl: string;
   price: number;
   size: number;
+  quantity: number;
 }

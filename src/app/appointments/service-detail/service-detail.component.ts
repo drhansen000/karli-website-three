@@ -12,8 +12,8 @@ import { ServiceListService } from 'src/app/service-list.service';
   styleUrls: ['./service-detail.component.css']
 })
 export class ServiceDetailComponent implements OnInit, OnDestroy {
-  service: Service = {name: '', imgUrl: '', price: '', duration: 0, descriptions: []};
-  private id: number;
+  service: Service = null;
+  id = -1;
   private paramsSubscription: Subscription;
   constructor(private serviceListService: ServiceListService,
               private route: ActivatedRoute,
@@ -44,11 +44,6 @@ export class ServiceDetailComponent implements OnInit, OnDestroy {
   */
   private getService(id: number): void {
     this.serviceListService.getService(id).pipe(take(1)).subscribe((service) => {
-      if (service === null) {
-        this.serviceListService.getServices().pipe(take(1)).subscribe(() => {
-          this.getService(id);
-        });
-      } else {
         this.service = {
           name: service.name,
           imgUrl: service.imgUrl,
@@ -56,7 +51,6 @@ export class ServiceDetailComponent implements OnInit, OnDestroy {
           duration: service.duration,
           descriptions: service.descriptions
         };
-      }
     });
   }
 

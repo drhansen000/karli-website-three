@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpErrorResponse } from '@angular/common/http';
-import { Observable, of } from 'rxjs';
+import { Observable, of, from } from 'rxjs';
 import { catchError, tap } from 'rxjs/operators';
 
 import { Service } from './service';
@@ -42,17 +42,35 @@ export class ServiceListService {
 
   /*
     GET SERVICE
-    Get an individual service from the services array
-    1. If the services array has been populated, return the desired service based on its index
-    2. Otherwise, return null
+    Get the service from the passed index
+    1. If services is populated, return the desired Service
+    2. Fetch the services in a JSON  format from the url
+    3. Convert the JSON into an object
+    4. Store the services
+    5. Return the specified service at the desired index
+    6. Catch any errors that might occur during steps 2 - 5
   */
-  getService(id: number): Observable<Service> {
-    if (this.services.length > 0) {
-      return of(this.services[id]);
-    } else {
-      return of(null);
-    }
+ getService(id: number): Observable<Service> {
+  if (this.services.length > 0) {
+    return of(this.services[id]);
+  } else {
+    return from(fetch(this.url)
+      .then((response) => {
+        if (response.ok) {
+          return response.json();
+        }
+        throw new Error('Error occurred fetching at: ' + this.url);
+      })
+      .then((services: Service[]) => {
+        this.services = services;
+        return services[id];
+      })
+      .catch((error) => {
+        console.log(error.message);
+        return null;
+      }));
   }
+}
 
   /*
     HANDLE ERROR

@@ -1,4 +1,5 @@
 <main>
+    <ng-container *ngIf="service !== null && id > -1; else waiting">
     <h1>{{service.name}}</h1>
     <img src="{{ service.imgUrl }}" alt="Example of {{ service.name }}">
     <p>${{ service.price }}</p>
@@ -6,4 +7,8 @@
        <li *ngFor="let description of service.descriptions">{{ description }}</li> 
     </ul>
     <button (click)="onCreateAppointment()" title="Schedule {{service.name}}" class="positiveButton">Create An Appointment</button>
+</ng-container>
+<ng-template #waiting>
+
+</ng-template>
 </main>

@@ -4,6 +4,10 @@ body {
     margin: 0;
 }
 
+img {
+    max-width: 100%;
+}
+
 .positiveButton {
     padding: .5em;
     border-radius: .5em;

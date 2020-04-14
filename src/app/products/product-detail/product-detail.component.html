@@ -1,7 +1,18 @@
 <main>
-    <h1>{{product.name}}</h1>
-    <img src="{{ product.imgUrl }}" alt="Example of {{ product.name }}">
-    <p>${{ product.price }}</p>
-    <p>{{product.size}}oz</p>
-    <button type="button" title="Add {{product.name}} to cart" class="positiveButton">Add to Cart</button>
+    <ng-container *ngIf="product !== null && id > -1; else waiting">
+        <h1>{{product.name}}</h1>
+        <img src="{{ product.imgUrl }}" alt="Example of {{ product.name }}">
+        <p>${{ product.price }}</p>
+        <p>{{product.size}}oz</p>
+        <label for="quantity">Quantity: </label>
+        <select name="quantity" #quantity>
+            <option *ngFor="let quantity of buildNumberArray(product.quantity)" value="{{quantity}}">{{quantity}}</option>
+        </select>
+        <button type="button" title="Add {{product.name}} to cart" class="positiveButton" (click)="onAddToCart(id, quantity.value)">Add to Cart</button>
+    </ng-container>
+    <ng-template #waiting>
+        <h1>Getting Product Details...</h1>
+        <p>Please be patient while we get the product's details</p>
+    </ng-template>
+    
 </main>

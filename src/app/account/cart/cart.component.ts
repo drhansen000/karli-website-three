@@ -16,7 +16,7 @@ export class CartComponent implements OnInit {
   cart: CartItem[] = [];
   products: Product[] = [];
 
-  constructor(private router: Router, private accountService: AccountService, private productService: ProductListService) { 
+  constructor(private router: Router, private accountService: AccountService, private productService: ProductListService) {
     this.cart = this.accountService.cart;
   }
 
