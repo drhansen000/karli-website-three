@@ -1,11 +1,11 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-
-import { AccountService } from '../account.service';
-import { ProductListService } from 'src/app/product-list.service';
-import { CartItem } from '../cart-item';
-import { Product } from 'src/app/product';
 import { take } from 'rxjs/operators';
+
+import { AccountService } from '../../services/account.service';
+import { ProductListService } from 'src/app/services/product-list.service';
+import { CartItem } from '../../interfaces/cart-item.interface';
+import { Product } from 'src/app/interfaces/product.interface';
 
 @Component({
   selector: 'app-cart',
@@ -21,8 +21,10 @@ export class CartComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.productService.getProducts().pipe(take(1)).subscribe((products: Product[]) => {
-      this.products = products;
+    this.productService.getProducts()
+      .pipe(take(1))
+      .subscribe((products: Product[]) => {
+        this.products = products;
     });
   }
 

@@ -3,8 +3,8 @@ import { take } from 'rxjs/operators';
 import { ActivatedRoute, Params, Router } from '@angular/router';
 import { Subscription } from 'rxjs';
 
-import { Service } from 'src/app/service';
-import { ServiceListService } from 'src/app/service-list.service';
+import { Service } from 'src/app/interfaces/service.interface';
+import { ServiceListService } from 'src/app/services/service-list.service';
 
 @Component({
   selector: 'app-service-detail',

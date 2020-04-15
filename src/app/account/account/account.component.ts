@@ -1,7 +1,8 @@
 import { Component, OnInit } from '@angular/core';
-import { User } from '../user';
-import { AccountService } from '../account.service';
 import { Router } from '@angular/router';
+
+import { User } from '../../interfaces/user.interface';
+import { AccountService } from '../../services/account.service';
 
 /*
   TODO LIST

@@ -1,7 +1,8 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { Router } from '@angular/router';
 import { Subscription } from 'rxjs';
-import { AccountService } from '../account.service';
+
+import { AccountService } from '../../services/account.service';
 /*
   TODO LIST
   1. Use Angular form handler

@@ -8,7 +8,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 import { AppComponent } from './app.component';
 import { AppRoutingModule, routingComponents } from './app-routing.module';
-import { ServicesComponent } from './home/services/services.component';
+import { SalonServicesComponent } from './home/salon-services/salon-services.component';
 import { AppointmentTableComponent } from './appointments/appointment-table/appointment-table.component';
 import { AppointmentsModalComponent } from './appointments/appointments-modal/appointments-modal.component';
 import { ProductsComponent } from './products/products/products.component';
@@ -18,7 +18,7 @@ import { ProductsComponent } from './products/products/products.component';
   declarations: [
     AppComponent,
     routingComponents,
-    ServicesComponent,
+    SalonServicesComponent,
     AppointmentTableComponent,
     AppointmentsModalComponent,
     ProductsComponent

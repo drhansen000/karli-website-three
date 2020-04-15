@@ -1,15 +1,15 @@
 import { Component, OnInit } from '@angular/core';
-import { ServiceListService } from 'src/app/service-list.service';
+import { ServiceListService } from 'src/app/services/service-list.service';
 import { take } from 'rxjs/operators';
 
-import { Service } from 'src/app/service';
+import { Service } from 'src/app/interfaces/service.interface';
 
 @Component({
-  selector: 'app-services',
-  templateUrl: './services.component.html',
-  styleUrls: ['./services.component.css']
+  selector: 'app-salon-services',
+  templateUrl: './salon-services.component.html',
+  styleUrls: ['./salon-services.component.css']
 })
-export class ServicesComponent implements OnInit {
+export class SalonServicesComponent implements OnInit {
   services: Service[] = [];
 
   constructor(private serviceListService: ServiceListService) {}

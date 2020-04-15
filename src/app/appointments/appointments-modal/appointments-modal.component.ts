@@ -1,11 +1,10 @@
 import { Component, OnInit, Inject } from '@angular/core';
 import { MAT_DIALOG_DATA } from '@angular/material/dialog';
-import { ServiceListService } from 'src/app/service-list.service';
-import { Subscription } from 'rxjs';
 import { take } from 'rxjs/operators';
-import { Service } from 'src/app/service';
-import { User } from 'src/app/account/user';
-import { AccountService } from 'src/app/account/account.service';
+
+import { Service } from 'src/app/interfaces/service.interface';
+import { ServiceListService } from 'src/app/services/service-list.service';
+import { AccountService } from 'src/app/services/account.service';
 
 /*
   TODOS

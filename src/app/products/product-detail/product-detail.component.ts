@@ -1,10 +1,10 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { Subscription } from 'rxjs';
 import { ActivatedRoute, Params } from '@angular/router';
-
-import { Product } from 'src/app/product';
-import { ProductListService } from 'src/app/product-list.service';
 import { take } from 'rxjs/operators';
+
+import { Product } from 'src/app/interfaces/product.interface';
+import { ProductListService } from 'src/app/services/product-list.service';
 
 @Component({
   selector: 'app-product-detail',
