@@ -14,16 +14,14 @@ import { CartComponent } from './account/cart/cart.component';
 import { FutureAppointmentsComponent } from './account/future-appointments/future-appointments.component';
 import { RegistrationComponent } from './account/registration/registration.component';
 import { AppointmentsComponent } from './appointments/appointments/appointments.component';
-import { ProductPageComponent } from './products/product-page/product-page.component';
 
 
 const routes: Routes = [
   {path: 'home', component: HomeComponent},
   {path: 'appointments', component: AppointmentsComponent},
-  {path: 'products', component: ProductPageComponent},
   {path: 'contact', component: ContactComponent},
   {path: 'service/:id', component: ServiceDetailComponent},
-  {path: 'products/:id', component: ProductDetailComponent},
+  {path: 'product/:id', component: ProductDetailComponent},
   {path: 'cart', component: CartComponent},
   {path: 'login', component: LoginComponent},
   {path: 'registration', component: RegistrationComponent},
@@ -35,7 +33,7 @@ const routes: Routes = [
 @NgModule({
   declarations: [],
   imports: [
-    RouterModule.forRoot(routes)
+    RouterModule.forRoot(routes, {anchorScrolling: 'enabled'})
   ],
   exports: [
     RouterModule
@@ -55,6 +53,5 @@ export const routingComponents = [
   ProductDetailComponent,
   RegistrationComponent,
   FutureAppointmentsComponent,
-  AccountComponent,
-  ProductPageComponent
+  AccountComponent
 ];

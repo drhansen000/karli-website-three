@@ -12,6 +12,7 @@ import { SalonServicesComponent } from './home/salon-services/salon-services.com
 import { AppointmentTableComponent } from './appointments/appointment-table/appointment-table.component';
 import { AppointmentsModalComponent } from './appointments/appointments-modal/appointments-modal.component';
 import { ProductsComponent } from './products/products/products.component';
+import { ExpandSublistDirective } from './directives/expand-sublist.directive';
 
 
 @NgModule({
@@ -21,7 +22,8 @@ import { ProductsComponent } from './products/products/products.component';
     SalonServicesComponent,
     AppointmentTableComponent,
     AppointmentsModalComponent,
-    ProductsComponent
+    ProductsComponent,
+    ExpandSublistDirective
   ],
   imports: [
     BrowserModule,

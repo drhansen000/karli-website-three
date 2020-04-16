@@ -16,6 +16,11 @@ li {
     margin: 0;
 }
 
+.sublist {
+    display: none;
+}
+
+
 a {
     box-sizing: border-box;
     display: block;
@@ -35,13 +40,26 @@ a:hover, .active {
 
 /* 3. Large Screen */
 @media (min-width: 800px) {
-    ul {
+    #mainList {
         display: flex;
         justify-content: space-around;
-        width: 50%;
+        width: 40%;
     }
 
-    li {
-        width: 25%;
+
+    #mainList li {
+        width: 33.33%;
+    }
+
+    .expand {
+        position: absolute;
+        display: block;
+        background-color: #000000;
+        cursor: pointer;
+    }
+
+    #mainList .sublist li {
+        width: 100%;
+        display: inline-block;
     }
 }

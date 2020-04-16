@@ -1,4 +1,10 @@
 import { Component, OnInit } from '@angular/core';
+import { Router, ActivatedRoute } from '@angular/router';
+
+/*
+  TODO:
+    1. Navigate to fragment on click redirect
+*/
 
 @Component({
   selector: 'app-nav',
@@ -7,9 +13,13 @@ import { Component, OnInit } from '@angular/core';
 })
 export class NavComponent implements OnInit {
 
-  constructor() { }
+  constructor(private router: Router, private route: ActivatedRoute) { }
 
   ngOnInit(): void {
+  }
+
+  onSublist(fragment: string) {
+    this.router.navigate(['/home'], {fragment});
   }
 
 }

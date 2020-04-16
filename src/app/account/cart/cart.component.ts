@@ -44,7 +44,7 @@ export class CartComponent implements OnInit {
   */
   onCheckout(): void {
     console.log('We checked out!');
-    this.router.navigate(['/products']);
+    this.router.navigate(['/home'], {fragment: 'products'});
   }
 
 }
