@@ -9,8 +9,6 @@ import { Subscription } from 'rxjs';
 })
 export class HomeComponent implements OnInit, OnDestroy, AfterViewInit {
   private fragmentSubscription: Subscription;
-  @ViewChild('#services', {static: false}) servicesView: ElementRef;
-  @ViewChild('products', {static: false}) productsView: ElementRef;
 
   constructor(private route: ActivatedRoute) {}
 
@@ -18,7 +16,7 @@ export class HomeComponent implements OnInit, OnDestroy, AfterViewInit {
 
   ngAfterViewInit() {
     this.route.fragment.subscribe((fragment) => {
-      if (fragment !== null) {
+      if (fragment !== undefined && fragment !== null) {
         document.querySelector('#' + fragment).scrollIntoView();
       }
     });

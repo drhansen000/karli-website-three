@@ -1,5 +1,5 @@
 <main>
-    <ng-container *ngIf="service !== null && id > -1; else waiting">
+    <ng-container *ngIf="service !== null; else waiting">
     <h1>{{service.name}}</h1>
     <img src="{{ service.imgUrl }}" alt="Example of {{ service.name }}">
     <p>${{ service.price }}</p>

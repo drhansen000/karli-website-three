@@ -11,11 +11,10 @@ import { ProductListService } from 'src/app/services/product-list.service';
   templateUrl: './product-detail.component.html',
   styleUrls: ['./product-detail.component.css']
 })
-export class ProductDetailComponent implements OnInit, OnDestroy {
+export class ProductDetailComponent implements OnInit {
   // product: Product = {name: '', imgUrl: '/assets/images/placeholder.jpg', price: 0, size: 0, quantity: 0};
   product: Product = null;
-  id = -1;
-  private paramsSubscription: Subscription;
+  private id;
 
   constructor(private productListService: ProductListService, private route: ActivatedRoute) {}
 
@@ -26,12 +25,10 @@ export class ProductDetailComponent implements OnInit, OnDestroy {
     2. The the product at index of id
   */
   ngOnInit(): void {
-    this.paramsSubscription = this.route.params.subscribe((params: Params) => {
-      this.id = params.id;
-      this.productListService.getProduct(params.id).pipe(take(1)).subscribe((product) => {
+      this.id = this.route.snapshot.params.id;
+      this.productListService.getProduct(this.id).pipe(take(1)).subscribe((product: Product) => {
         this.product = product;
       });
-    });
   }
 
   /*
@@ -63,12 +60,7 @@ export class ProductDetailComponent implements OnInit, OnDestroy {
 
     This method fires when the user clicks 'Add to Cart'
   */
-  onAddToCart(id: number, quantity: number) {
-    console.log('Added ' + quantity + ' of ' + id);
+  onAddToCart(quantity: number) {
+    console.log('Added ' + quantity + ' of ' + this.id);
   }
-
-  ngOnDestroy(): void {
-    this.paramsSubscription.unsubscribe();
-  }
-
 }

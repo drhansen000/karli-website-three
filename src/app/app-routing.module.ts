@@ -14,6 +14,7 @@ import { CartComponent } from './account/cart/cart.component';
 import { FutureAppointmentsComponent } from './account/future-appointments/future-appointments.component';
 import { RegistrationComponent } from './account/registration/registration.component';
 import { AppointmentsComponent } from './appointments/appointments/appointments.component';
+import { LoginAuthGuardService } from './services/login-auth-guard.service';
 
 
 const routes: Routes = [
@@ -26,12 +27,11 @@ const routes: Routes = [
   {path: 'login', component: LoginComponent},
   {path: 'registration', component: RegistrationComponent},
   {path: 'future-appointments', component: FutureAppointmentsComponent},
-  {path: 'account', component: AccountComponent},
-  {path: '', redirectTo: '/home', pathMatch: 'prefix'} // Default Route
+  {path: 'account', canActivate: [LoginAuthGuardService], component: AccountComponent},
+  {path: '**', redirectTo: '/home' } // Default Route
 ];
 
 @NgModule({
-  declarations: [],
   imports: [
     RouterModule.forRoot(routes, {anchorScrolling: 'enabled'})
   ],

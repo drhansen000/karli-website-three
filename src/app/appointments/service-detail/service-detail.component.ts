@@ -11,10 +11,9 @@ import { ServiceListService } from 'src/app/services/service-list.service';
   templateUrl: './service-detail.component.html',
   styleUrls: ['./service-detail.component.css']
 })
-export class ServiceDetailComponent implements OnInit, OnDestroy {
+export class ServiceDetailComponent implements OnInit {
   service: Service = null;
-  id = -1;
-  private paramsSubscription: Subscription;
+  private id;
   constructor(private serviceListService: ServiceListService,
               private route: ActivatedRoute,
               private router: Router) {}
@@ -26,10 +25,8 @@ export class ServiceDetailComponent implements OnInit, OnDestroy {
     1. Initialize our service by calling our getService method and passing it the recieved id
   */
   ngOnInit(): void {
-    this.paramsSubscription = this.route.params.subscribe((params: Params) => {
-      this.id = params.id;
-      this.getService(this.id);
-    });
+    this.id = this.route.snapshot.params.id;
+    this.getService(this.id);
   }
 
   /*
@@ -43,14 +40,8 @@ export class ServiceDetailComponent implements OnInit, OnDestroy {
       b. Call our method again
   */
   private getService(id: number): void {
-    this.serviceListService.getService(id).pipe(take(1)).subscribe((service) => {
-        this.service = {
-          name: service.name,
-          imgUrl: service.imgUrl,
-          price: service.price,
-          duration: service.duration,
-          descriptions: service.descriptions
-        };
+    this.serviceListService.getService(id).pipe(take(1)).subscribe((service: Service) => {
+        this.service = service;
     });
   }
 
@@ -58,16 +49,4 @@ export class ServiceDetailComponent implements OnInit, OnDestroy {
     sessionStorage.setItem('serviceId', '' + this.id);
     this.router.navigate(['/appointments']);
   }
-
-  /*
-    NG ON DESTROY
-    Destroy any subscriptions
-    1. Destroy the ActivatedRoute's params subscription (It's automatically unsubscribed, but it's still good practice)
-
-    This method fires when the component is destroyed
-  */
-  ngOnDestroy() {
-    this.paramsSubscription.unsubscribe();
-  }
-
 }
